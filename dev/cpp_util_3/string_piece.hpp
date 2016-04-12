@@ -4,7 +4,7 @@
 
 /*!
  * \since v.2.3.1
- * \brief Обертка над голыми указателями на char и над std::string.
+ * \brief A simple wrapper for raw char pointers and std::string.
  */
 
 #pragma once
@@ -20,18 +20,17 @@ namespace cpp_util_3 {
 
 /*!
  * \since v.2.3.1
- * \brief Обертка над голыми указателями на char и над std::string.
+ * \brief A simple wrapper for raw char pointers and std::string.
  *
- * Идея нагло сперта из библиотеки PCRE (http://www.pcre.org). Там
- * этот класс используется для реалиазации C++ классов, методы которых
- * должны получать строковые аргументы. Класс string_piece_t позволяет
- * унифицировано работать как с const char *, так и с const std::string &
- * не требуя копирования значения аргумента.
+ * The idea of that class was borrowed from PCRE (http://www.pcre.org).
+ * This class can be used for simplification of work with raw char
+ * pointers and std::string object (without creation of std::string
+ * from raw pointers).
  *
  * \par v.2.5.0
  *
- * При использовании версии 2.4.0 выяснилось, что не во всех случаях
- * длина строкового литерала будет такой, как это ожидается:
+ * In v.2.4.0 was discovered that length of string is not always
+ * calculated correctly:
  * \code
  * char tmp[ 32 ];
  * std::strcpy( tmp, "test" );
@@ -39,14 +38,14 @@ namespace cpp_util_3 {
  *
  * void f( const cpp_util_3::string_piece_t name )
  * {
- * 	// Здесь name.size == 32 а не 4!
+ * 	// name.size == 32, not 4!
  * }
  * \endcode
- * Проблема была устранена за счет отказа от шаблонных конструкторов.
+ * Because of that templated constructors removed in v.2.5.0.
  *
- * \par Благодарности
- * <a href="http://www.rsdn.ru/Users/48023.aspx">night beast</a> за
- * обнаруженные ошибки в реализации шаблонных конструкторов.
+ * \par Thanks
+ * <a href="http://www.rsdn.ru/Users/48023.aspx">night beast</a> for
+ * discovering of error in templated constructors implementations.
  */
 class string_piece_t
 	{
@@ -64,7 +63,7 @@ class string_piece_t
 	private:
 		/*!
 		 * \since v.2.4.0
-		 * \brief Структура внутренностей объекта string_piece.
+		 * \brief Internal data.
 		 */
 		struct data_t
 			{
@@ -77,8 +76,7 @@ class string_piece_t
 
 		/*!
 		 * \since v.2.4.0
-		 * \brief Конструирование внутренностей string_piece из
-		 * null-terminated строки.
+		 * \brief Make string piece from null-terminated string.
 		 */
 		inline static data_t
 		from_null_terminated( const char * p )
@@ -98,7 +96,7 @@ class string_piece_t
 
 		/*!
 		 * \since v.2.4.0
-		 * \brief Конструирование внутренностей string_piece из std::string.
+		 * \brief Make string piece from std::string.
 		 */
 		inline static data_t
 		from_std_basic_string( const std::string & s )
@@ -112,8 +110,7 @@ class string_piece_t
 
 		/*!
 		 * \since v.2.4.0
-		 * \brief Конструирование внутренностей string_piece из фрагмента
-		 * вектора char-ов.
+		 * \brief Make string piece from char array of some length.
 		 */
 		inline static data_t
 		from_array_fragment( const char * p, size_t len )
@@ -133,7 +130,7 @@ class string_piece_t
 
 		/*!
 		 * \since v.2.4.0
-		 * \brief Конструирование пустых внутренностей string_piece.
+		 * \brief Make an empty string piece.
 		 */
 		inline static data_t
 		empty_data()
@@ -144,32 +141,28 @@ class string_piece_t
 
 		/*!
 		 * \since v.2.4.0
-		 * \brief Внутренности объекта string_piece.
+		 * \brief Internal data.
 		 */
 		data_t m_data;
 
 	public:
-		//! Конструктор по умолчанию.
 		string_piece_t()
 			:	m_data( empty_data() )
 			{}
-		//! Конструктор для случая std::string.
 		string_piece_t( const std::string & str )
 			:	m_data( from_std_basic_string( str ) )
 			{}
-		//! Констуктор для случая строкового буфера.
 		string_piece_t( const char * ptr, size_t len )
 			:	m_data( from_array_fragment( ptr, len ) )
 			{}
-		//! Констуктор для случая строкового буфера.
 		string_piece_t( const unsigned char * ptr, size_t len )
 			:	m_data( from_array_fragment( ptr, len ) )
 			{}
-		//! Конструктор для случая null-terminated строки.
+		//! For null-terminated strings.
 		string_piece_t( const char * p )
 			:	m_data( from_null_terminated( p ) )
 			{}
-		//! Конструктор для случая null-terminated строки.
+		//! For null-terminated strings.
 		string_piece_t( const unsigned char * p )
 			:	m_data( from_null_terminated( p ) )
 			{}
@@ -193,6 +186,12 @@ class string_piece_t
 
 		void
 		clear() { m_data = empty_data(); }
+
+		const char *
+		begin() const { return data(); }
+
+		const char *
+		end() const { return data() + size(); }
 
 		void
 		set( const char* buffer, size_t len )
@@ -287,15 +286,13 @@ class string_piece_t
 
 /*!
  * \since v.2.5.0
- * \brief Вспомогательная функция для оптимизации конструирования
- * string_piece из строковых литералов.
+ * \brief Helper for building string piece from string literals.
  *
- * Пример использования:
- *
+ * Usage example:
  * \code
- * void some_function( const cpp_util_3::string_piece_t & a ) {...}
- * ...
- * some_function( cpp_util_3::string_literal( "Hello!" ) );
+	void some_function( const cpp_util_3::string_piece_t & a ) {...}
+	...
+	some_function( cpp_util_3::string_literal( "Hello!" ) );
  * \endcode
  */
 template< size_t N >
@@ -307,15 +304,13 @@ string_literal( const char (&c)[ N ] )
 
 /*!
  * \since v.2.5.0
- * \brief Вспомогательная функция для оптимизации конструирования
- * string_piece из строковых литералов.
+ * \brief Helper for building string piece from string literals.
  *
- * Пример использования:
- *
+ * Usage example:
  * \code
- * void some_function( const cpp_util_3::string_piece_t & a ) {...}
- * ...
- * some_function( cpp_util_3::string_literal( "Hello!" ) );
+	void some_function( const cpp_util_3::string_piece_t & a ) {...}
+	...
+	some_function( cpp_util_3::string_literal( "Hello!" ) );
  * \endcode
  */
 template< size_t N >
