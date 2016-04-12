@@ -1,6 +1,5 @@
 /*
-	Пример порождения исключения с использованием
-	cpp_util_3::lexcast().
+	An example of throwing an exception with help from cpp_util_3::slexcast().
 */
 
 #include <map>
@@ -10,40 +9,27 @@
 
 #include <cpp_util_3/lexcast.hpp>
 
-// Класс словаря, в котором оператор [] порождает
-// исключение, если элемент не найден по ключу.
+// Class of map in which operator[] throws an exception
+// if key is not found.
 template< class Key, class Value, class Pred = std::less< Key > >
 class	hard_map_t : public std::map< Key, Value, Pred >
 {
 	typedef std::map< Key, Value, Pred > base_type_t;
 	public :
-		hard_map_t()
-		{}
-		hard_map_t( const hard_map_t & o )
-		:
-			base_type_t( o )
-		{}
-
-		hard_map_t &
-		operator=( const hard_map_t & o )
-		{
-			base_type_t::operator=( o );
-			return *this;
-		}
+		using base_type_t::base_type_t;
 
 		Value &
 		operator[]( const Key & k )
 		{
-			typename base_type_t::iterator it = this->find( k );
+			auto it = this->find( k );
 			if( it == this->end() )
 				throw std::invalid_argument(
-					std::string( "Key not found: " ) +
-					cpp_util_3::lexcast< std::string >( k ) );
+					std::string( "Key not found: " ) + cpp_util_3::slexcast( k ) );
 			return it->second;
 		}
 };
 
-// Проверяем работу карты с целыми ключами.
+// Checks for map with ints as keys.
 void
 check_int()
 {
@@ -67,7 +53,7 @@ check_int()
 	}
 }
 
-// Проверяем работу карты со строковыми ключами.
+// Checks for map with strings as keys.
 void
 check_string()
 {
@@ -99,3 +85,4 @@ main()
 
 	return 0;
 }
+

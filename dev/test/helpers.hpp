@@ -5,7 +5,7 @@
 /*!
  * \since v.2.3.0
  * \file
- * \brief Вспомогательные средства для организации unit-тестирования.
+ * \brief Helper for unit-testing.
  */
 
 #pragma once

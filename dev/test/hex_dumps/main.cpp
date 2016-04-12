@@ -1,5 +1,5 @@
 /*
- * Тестирование string_dumper-а.
+ * Tests for string_dumper.
  */
 
 #include <cpp_util_3/hex_dumps/string_dumper.hpp>

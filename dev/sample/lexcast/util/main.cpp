@@ -1,5 +1,5 @@
 /*
-	ѕример работы со средствами из cpp_util_3/lexcast/h/util.hpp.
+	Examples of usage of tools from cpp_util_3/lexcast/util.hpp.
 */
 
 #include <map>
@@ -12,24 +12,25 @@
 
 #include <cpp_util_3/lexcasts/util.hpp>
 
-// ƒемонстраци€ работы cpp_util_3::slexcast.
+// Demo for cpp_util_3::slexcast.
 void
 slexcast_demo()
 {
 	std::string pre( "This is string with spaces." );
+	// Post must be equal to pre.
 	std::string	post( cpp_util_3::slexcast( pre ) );
 
 	std::cout << "*** slexcast_demo:\n\tpre: "
 		<< pre << "\n\tpost: " << post << "\n" << std::endl;
 }
 
-// ƒемонстраци€ преобразовани€ в шестнадцатиричное представление.
+// Demo for transformation into hex representation.
 void
 hex_putter_demo()
 {
-	// ≈сли тип char по умолчанию беззнаковый.
+	// For the case when char is unsigned by default.
 	char c1 = 16;
-	// ≈сли тип char по умолчанию знаковый.
+	// For the case when char is signed by default.
 	char c2 = static_cast< char >( -3 );
 	signed char c_negative = -3;
 	unsigned char uc = 16;
@@ -166,7 +167,7 @@ hex_putter_demo()
 		<< std::endl;
 }
 
-// ƒемонстраци€ преобразовани€ из шестнадцатиричного представлени€ в число.
+// Demo for transforming numbers from hex representation.
 void
 hex_getter_demo()
 {
@@ -237,8 +238,7 @@ hex_getter_demo()
 		<< std::endl;
 }
 
-// ѕреобразование значений контейнера с
-// использованием cpp_util_3::slexcast().
+// Dumping values of containers.
 void
 container_putter_demo()
 {
@@ -253,18 +253,15 @@ container_putter_demo()
 				std::begin(ui), std::end(ui), " ",
 				cpp_util_3::lexcasts::hex_0x() ) << std::endl;
 
-	// ѕечать всех значений вектора строк, раздел€€ каждое значение
-	// переводом строки.
+	// Print all values from a set with newline as separator.
 	std::set< std::string >	ss;
 	ss.insert( "AAA" );
 	ss.insert( "CCC" );
 	ss.insert( "BBB" );
 	ss.insert( "EEE" );
 	ss.insert( "DDD" );
-#if !defined( __BORLANDC__ )
 	std::cout << cpp_util_3::lexcasts::all( ss.begin(), ss.end(), "\n" )
 		<< std::endl;
-#endif
 
 	// Yet again but simpler.
 	std::cout << cpp_util_3::lexcasts::all( ss, "\n" ) << std::endl;
@@ -295,3 +292,4 @@ main()
 
 	return 0;
 }
+
