@@ -18,6 +18,19 @@ void check_type(
 		CHECK_CONDITION( p.type() == expected_type );
 	}
 
+void check_begin_end()
+	{
+		auto f = []( cpp_util_3::string_piece_t str ) -> std::string {
+			std::string r; r.reserve( str.size() );
+			for( auto c : str )
+				r += c;
+			return r;
+		};
+
+		CHECK_CONDITION( "abcd" == f( "abcd" ) );
+		CHECK_CONDITION( "" == f( cpp_util_3::string_piece_t() ) );
+	}
+
 UNIT_TEST_MAIN(
 	const char * s1 = "abc";
 	const std::string s2 = "abc";
