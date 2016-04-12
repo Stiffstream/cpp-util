@@ -3,9 +3,11 @@
  */
 
 /*!
- * \since v.2.3.0
- * \brief —редства дл€ оптимизации создани€ шестнадцатиричных дампов
- * содержимого std::string.
+ * \file
+ * \since
+ * v.2.3.0
+ *
+ * \brief Tools for optimized dumps of std::string in hex format.
  */
 
 #pragma once
@@ -29,20 +31,20 @@ namespace cpp_util_3 {
 namespace hex_dumps {
 
 /*!
- * \since v.2.3.0
- * \brief ¬спомогательный класс, который предназначен дл€ хранени€
- * ссылки на помещаемую в std::ostream строку.
+ * \since
+ * v.2.3.0
  *
- * ѕример использовани€:
+ * \brief Helper class for dumping string value to ostream.
+ *
+ * Usage example:
  * \code
  * std::string s( "hello, world" );
  * std::cout << cpp_util_3::hex_dumps::string_dumper( s ) << std::endl;
  * \endcode
  *
  * \par v.2.3.1
- * “еперь в качестве параметра получает string_piece, что позвол€ет
- * использовать его не только с std::string, но и с другими представлени€ми
- * строк без лишних накладных расходов.
+ * Since v.2.3.1 uses string_piece_t. This allows to dump raw C-strings
+ * without transforming them into std::string.
  */
 class	string_dumper
 	{
@@ -59,10 +61,12 @@ class	string_dumper
 	};
 
 /*!
- * \since v.2.3.0
- * \brief ќператор сдвига string_dumper-а в std::ostream.
+ * \since
+ * v.2.3.0
  *
- * »менно он отвечат за форматирование строки.
+ * \brief Actual implementation of string dumper.
+ *
+ * \note Allocates memory for temporary buffer.
  */
 inline std::ostream &
 operator<<( std::ostream & to, const string_dumper & s )
@@ -92,15 +96,15 @@ operator<<( std::ostream & to, const string_dumper & s )
 	}
 
 /*!
- * \since v.2.3.1
- * \brief ¬спомогательный класс, который предназначен дл€ хранени€
- * ссылки на помещаемую в std::ostream строку.
+ * \since
+ * v.2.3.1
  *
- * »спользуетс€ дл€ форматировани€ строк, не печатаемые символы которых,
- * отображаютс€ в виде шестнадцатиричных escape-последовательностей.
- * ¬ виде escape-последовательности отображаютс€ символы с кодами 0..31.
+ * \brief Another string dumper with hex-escaped for non-printable symbols.
  *
- * ѕример использовани€:
+ * Symbols with codes 0..31 are dumped as hex-escaped sequences
+ * (like \\x00, \\x01 and so on).
+ *
+ * Usage example:
  * \code
  * std::string s( "hello, world" );
  * std::cout << cpp_util_3::hex_dumps::hex_escaped_string_dumper( s )
@@ -122,16 +126,16 @@ class	hex_escaped_string_dumper
 	};
 
 /*!
- * \since v.2.3.1
- * \brief ќператор сдвига hex_escaped_string_dumper-а в std::ostream.
+ * \since
+ * v.2.3.1
  *
- * »менно он отвечат за форматирование строки.
+ * \note Allocates memory for temporary buffer.
  */
 inline std::ostream &
 operator<<( std::ostream & to, const hex_escaped_string_dumper & s )
 	{
 		const string_piece_t & what = s.what();
-		// «начение берем с гарантией.
+		// Allocate memory for worst case.
 		const size_t need_space = what.size() * 4;
 		if( need_space )
 			{
@@ -145,9 +149,7 @@ operator<<( std::ostream & to, const hex_escaped_string_dumper & s )
 					{
 						if( 0 <= *p && *p < ' ' )
 							{
-								auto l = std::sprintf(
-										pos,
-										"\\x%02x",
+								auto l = std::sprintf( pos, "\\x%02x",
 										static_cast< unsigned int >(
 												static_cast< unsigned char >( *p ) ) );
 								pos += l;
@@ -165,14 +167,12 @@ operator<<( std::ostream & to, const hex_escaped_string_dumper & s )
 	}
 
 /*!
- * \since v.2.6.0
- * \brief ¬спомогательный класс, который предназначен дл€ хранени€
- * ссылки на помещаемую в std::ostream строку.
+ * \since
+ * v.2.6.0
  *
- * »спользуетс€ дл€ форматировани€ строк в шестнадцатиричное представление
- * без пробелов между символами.
+ * \brief Helper class for dumping hex representation without spaces.
  *
- * ѕример использовани€:
+ * Usage example:
  * \code
  * std::string s( "hello, world" );
  * std::cout << cpp_util_3::hex_dumps::string_dumper_without_spaces( s )
@@ -194,10 +194,10 @@ class	string_dumper_without_spaces
 	};
 
 /*!
- * \since v.2.6.0
- * \brief ќператор сдвига string_dumper_without_spaces-а в std::ostream.
+ * \since
+ * v.2.6.0
  *
- * »менно он отвечат за форматирование строки.
+ * \note Allocates memory for temporary buffer.
  */
 inline std::ostream &
 operator<<( std::ostream & to, const string_dumper_without_spaces & s )

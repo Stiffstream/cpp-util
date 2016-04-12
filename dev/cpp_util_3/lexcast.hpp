@@ -1,26 +1,7 @@
-/*
-
-Yauheni A. Akhotnikau (C) 1997-2003
-e-mail: eao197@yahoo.com
-
-Permission is granted to anyone to use this software for any purpose on any
-computer system, and to redistribute it freely, subject to the following
-restrictions:
-
-1. This software is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-2. The origin of this software must not be misrepresented, either by
-   explicit claim or by omission.
-
-3. Altered versions must be plainly marked as such, and must not be
-   misrepresented as being the original software.
-
-*/
-
 /*!
-	\since v.2.0.2
+	\since
+	v.2.0.2
+
 	\file
 	\brief Функция для конвертации значений из одного типа в
 		другой с использованием промежуточного текстового представления.
@@ -34,114 +15,58 @@ namespace	cpp_util_3
 {
 
 /*!
-	\since v.2.0.2
-	\brief Функция для конвертации значений из одного типа в
-		другой с использованием промежуточного текстового представления.
+	\since
+	v.2.0.2
 
-	В ряде случаев возникает задача преобразования некоторого значения
-	в его текстовое представление. Например, при порождении исключений:
+	\brief A very simple alternative of boost::lexical_cast.
+
+	Usage example:
 \code
-// Способ 1. Использование sprintf.
-const std::string &
-my_string_vector_t::operator[]( unsigned int index ) const
-{
-	if( index >= size() )
-	{
-		// Преобразуем index в строку, чтобы можно
-		// было сформировать подробное описание ошибки.
-		char tmp[ 32 ];
-		sprintf( tmp, "%u", index );
-		throw std::out_of_range(
-			std::string( "index is too big" ) + tmp );
-	}
-	...
-}
-// Способ 2. Использование std::ostringstream.
-const std::string &
-my_string_vector_t::operator[]( unsigned int index ) const
-{
-	if( index >= size() )
-	{
-		// Преобразуем index в строку, чтобы можно
-		// было сформировать подробное описание ошибки.
-		std::ostringstream tmp;
-		tmp << index;
-		throw std::out_of_range(
-			std::string( "index is too big" ) + tmp.str() );
-	}
-	...
-}
-\endcode
-
-	Оба этих способа усложняют код не нужными подробностями
-	преобразования одного значения в строковое представление.
-	И, хотя способ с sprintf более эффективен, он более сложен в
-	сопровождении, т.к. формат sprintf жестко связан с типом
-	параметра index. Если со временем index поменяет тип (на unsigned long
-	для очень больших массивов или на std::string для ассоциативных
-	массивов), то придется помнить про особенность форматной
-	строки sprintf. В случае с std::ostringstream такой проблемы нет.
-
-	Функция lexcast() упрощает подобные преобразования, сохраняя
-	все достоинства и недостатки способа с применением std::ostringstream.
-	В приведенном примере функция lexcast() может быть использована
-	следующим образом:
-\code
-// Способ 3. Использование cpp_util_3::lexcast.
 const std::string &
 my_string_vector_t::operator[]( unsigned int index ) const
 {
 	if( index >= size() )
 		throw std::out_of_range(
-			std::string( "index is too big" ) +
+			std::string( "index is too big: " ) +
 			cpp_util_3::lexcast< std::string >( index ) );
 	...
 }
 \endcode
-	или, что еще проще:
+	Or more simple way:
 \code
-// Способ 4. Использование cpp_util_3::slexcast.
 const std::string &
 my_string_vector_t::operator[]( unsigned int index ) const
 {
 	if( index >= size() )
 		throw std::out_of_range(
-			std::string( "index is too big" ) +
+			std::string( "index is too big: " ) +
 			cpp_util_3::slexcast( index ) );
 	...
 }
 \endcode
 
-	То, что для преобразования значений используется промежуточное
-	текстовое представление позволяет не только преобразовывать
-	числовые значения в строку, но и преобразовывать строку в
-	числовое значение.
+	\note Allows to convert numbers to strings. And other way: strings
+	to numbers.
 
-	\par Порождение исключений.
-	Сама функция lexcast() исключений не порождает и не контролирует
-	успешность выполнения преобразований. Но lexcast не перехватывает
-	никаких исключений, которые могут быть порождены операторами
-	сдвига.
+	\par Exceptions
+	Function lexcast() do not throw any exception by itselt.
+	It also do not control the success of value transformations.
+	But these transformation can raise some exceptions: lexcast() do
+	not catch them.
 
-	\par Требование к типу \c From.
-	Для типа \c From должен быть определен оператор сдвига
-	в std::ostream.
+	\par Requirements for type From.
+	There should be operator<<() for std::ostream.
 
-	\par Требование к типу \c To.
-	Для типа \с To должен быть определен оператор сдвига из
-	std::istream.
-
-	\return Значение, полученное преобразованием \a f в текстовое
-	представление, а затем считанное из текстового представления.
-	Результат не определен, если текстовое представление \a f
-	не может быть корректно приведено к типу \c To.
+	\par Requirements for type To.
+	There should be operator>>() for std::istream.
+	Type \c To must be DefaultConstructible.
 
 	\sa cpp_util_3::slexcast()
 */
 template< class To, class From >
 To
 lexcast(
-	//! Что преобразуется.
+	//! Value to transform.
 	const From & f )
 {
 	std::stringstream	ss;
@@ -154,16 +79,13 @@ lexcast(
 }
 
 /*!
-	\since v.2.1.0
-	\brief Функция для конвертации значений из одного типа в
-		другой с использованием промежуточного текстового представления
-		и специального способа преобразования значения.
+	\since
+	v.2.1.0
 
-	Данный вариант lexcast использует объект-преобразователь, который
-	осуществляет преобразование значения в std::stringstream.
+	The same as lexcast() but uses \a putter for storing \a f
+	into temporary ostream.
 
-	\par Требования к типу Putter
-	Тип Putter должен иметь метод operator() следующего формата:
+	Type \a Putter must have operator() with the following format:
 \code
 void
 operator( std::ostream & to, const From & what ) const;
@@ -172,9 +94,9 @@ operator( std::ostream & to, const From & what ) const;
 template< class To, class From, class Putter >
 To
 lexcast(
-	//! Что преобразуется.
+	//! What to transform.
 	const From & f,
-	//! Как преобразуется.
+	//! How to transform.
 	const Putter & putter )
 {
 	std::stringstream	ss;
