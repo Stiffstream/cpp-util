@@ -2,13 +2,13 @@
  * Testing for rollback_on_exception.
  */
 
-#include <cpp_util_2/h/rollback_on_exception.hpp>
+#include <cpp_util_3/h/rollback_on_exception.hpp>
 
 #include <test/h/helpers.hpp>
 
 #include <sstream>
 
-using namespace cpp_util_2;
+using namespace cpp_util_3;
 
 void
 change_or_throw( std::string & what, bool must_throw )

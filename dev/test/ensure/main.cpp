@@ -2,11 +2,11 @@
  * Testing for ensure.
  */
 
-#include <cpp_util_2/h/ensure.hpp>
+#include <cpp_util_3/h/ensure.hpp>
 
 #include <test/h/helpers.hpp>
 
-using namespace cpp_util_2;
+using namespace cpp_util_3;
 
 void
 simple_test()

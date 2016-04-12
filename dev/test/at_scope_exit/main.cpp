@@ -2,13 +2,13 @@
  * Testing for at_scope_exit.
  */
 
-#include <cpp_util_2/h/at_scope_exit.hpp>
+#include <cpp_util_3/h/at_scope_exit.hpp>
 
 #include <test/h/helpers.hpp>
 
 #include <sstream>
 
-using namespace cpp_util_2;
+using namespace cpp_util_3;
 
 void
 simple_test()

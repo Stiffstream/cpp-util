@@ -20,15 +20,14 @@ restrictions:
 */
 
 /*!
-	\file cpp_util_2/h/defs.hpp
+	\file
 	\brief Не привязанные к компилятору макросы.
 
 	Основные макросы, которые могут использоваться в любых
 	компиляторах.
 */
 
-#if !defined( _CPP_UTIL_2__DEFS_HPP_ )
-#define _CPP_UTIL_2__DEFS_HPP_
+#pragma once
 
 /*!
 	\def CPP_UTIL_2_ASIZE(array)
@@ -43,4 +42,3 @@ restrictions:
 */
 #define CPP_UTIL_2_SIZEOFATTR( t, a ) (sizeof(((t *)0)->a))
 
-#endif

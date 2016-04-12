@@ -1,6 +1,6 @@
 /*
 	Пример порождения исключения с использованием
-	cpp_util_2::lexcast().
+	cpp_util_3::lexcast().
 */
 
 #include <map>
@@ -8,7 +8,7 @@
 #include <iostream>
 #include <stdexcept>
 
-#include <cpp_util_2/h/lexcast.hpp>
+#include <cpp_util_3/h/lexcast.hpp>
 
 // Класс словаря, в котором оператор [] порождает
 // исключение, если элемент не найден по ключу.
@@ -38,7 +38,7 @@ class	hard_map_t : public std::map< Key, Value, Pred >
 			if( it == this->end() )
 				throw std::invalid_argument(
 					std::string( "Key not found: " ) +
-					cpp_util_2::lexcast< std::string >( k ) );
+					cpp_util_3::lexcast< std::string >( k ) );
 			return it->second;
 		}
 };

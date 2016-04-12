@@ -20,7 +20,7 @@ restrictions:
 */
 
 /*!
-	\file cpp_util_2/h/detect_compiler.hpp
+	\file
 	\brief Зависящие от компилятора макросы.
 
 	Макросы, имена которых для всех компиляторов остаются

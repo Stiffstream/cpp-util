@@ -1,5 +1,5 @@
 /*
- * cpp_util_2
+ * cpp_util_3
  */
 
 /*!
@@ -12,7 +12,7 @@
 #include <string>
 #include <cstring>
 
-namespace cpp_util_2 {
+namespace cpp_util_3 {
 
 //
 // string_piece_t
@@ -37,7 +37,7 @@ namespace cpp_util_2 {
  * std::strcpy( tmp, "test" );
  * f( tmp );
  *
- * void f( const cpp_util_2::string_piece_t name )
+ * void f( const cpp_util_3::string_piece_t name )
  * {
  * 	// Здесь name.size == 32 а не 4!
  * }
@@ -293,9 +293,9 @@ class string_piece_t
  * Пример использования:
  *
  * \code
- * void some_function( const cpp_util_2::string_piece_t & a ) {...}
+ * void some_function( const cpp_util_3::string_piece_t & a ) {...}
  * ...
- * some_function( cpp_util_2::string_literal( "Hello!" ) );
+ * some_function( cpp_util_3::string_literal( "Hello!" ) );
  * \endcode
  */
 template< size_t N >
@@ -313,9 +313,9 @@ string_literal( const char (&c)[ N ] )
  * Пример использования:
  *
  * \code
- * void some_function( const cpp_util_2::string_piece_t & a ) {...}
+ * void some_function( const cpp_util_3::string_piece_t & a ) {...}
  * ...
- * some_function( cpp_util_2::string_literal( "Hello!" ) );
+ * some_function( cpp_util_3::string_literal( "Hello!" ) );
  * \endcode
  */
 template< size_t N >
@@ -325,5 +325,5 @@ string_literal( const unsigned char (&c)[ N ] )
 		return string_piece_t( c, N-1 );
 	}
 
-} /* namespace cpp_util_2 */
+} /* namespace cpp_util_3 */
 

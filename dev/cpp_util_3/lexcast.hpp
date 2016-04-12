@@ -30,7 +30,7 @@ restrictions:
 
 #include <sstream>
 
-namespace	cpp_util_2
+namespace	cpp_util_3
 {
 
 /*!
@@ -87,27 +87,27 @@ my_string_vector_t::operator[]( unsigned int index ) const
 	В приведенном примере функция lexcast() может быть использована
 	следующим образом:
 \code
-// Способ 3. Использование cpp_util_2::lexcast.
+// Способ 3. Использование cpp_util_3::lexcast.
 const std::string &
 my_string_vector_t::operator[]( unsigned int index ) const
 {
 	if( index >= size() )
 		throw std::out_of_range(
 			std::string( "index is too big" ) +
-			cpp_util_2::lexcast< std::string >( index ) );
+			cpp_util_3::lexcast< std::string >( index ) );
 	...
 }
 \endcode
 	или, что еще проще:
 \code
-// Способ 4. Использование cpp_util_2::slexcast.
+// Способ 4. Использование cpp_util_3::slexcast.
 const std::string &
 my_string_vector_t::operator[]( unsigned int index ) const
 {
 	if( index >= size() )
 		throw std::out_of_range(
 			std::string( "index is too big" ) +
-			cpp_util_2::slexcast( index ) );
+			cpp_util_3::slexcast( index ) );
 	...
 }
 \endcode
@@ -136,7 +136,7 @@ my_string_vector_t::operator[]( unsigned int index ) const
 	Результат не определен, если текстовое представление \a f
 	не может быть корректно приведено к типу \c To.
 
-	\sa cpp_util_2::slexcast()
+	\sa cpp_util_3::slexcast()
 */
 template< class To, class From >
 To
@@ -198,12 +198,12 @@ lexcast(
 	std::istream.
 
 	Если требуется только специальный объект-getter, то в качестве
-	объекта-putter можно указать объект cpp_util_2::lexcasts::def_putter:
+	объекта-putter можно указать объект cpp_util_3::lexcasts::def_putter:
 \code
 // Извлекаем число из строкового шестнадцатиричного представления.
-int i = cpp_util_2::lexcast< int >( "ffab",
-	cpp_util_2::lexcasts::def_putter(),
-	cpp_util_2::lexcasts::hex_getter() );
+int i = cpp_util_3::lexcast< int >( "ffab",
+	cpp_util_3::lexcasts::def_putter(),
+	cpp_util_3::lexcasts::hex_getter() );
 \endcode
 
 	\par Требования к типу Putter
@@ -244,7 +244,7 @@ lexcast(
 
 	Вариант функции lexcast() для преобразования в строку.
 
-	С помощью cpp_util_2::lexcast() можно попытаться преобразовать
+	С помощью cpp_util_3::lexcast() можно попытаться преобразовать
 	любой объект в строку, если у этого объекта определен оператор
 	сдвига в std::ostream. Например:
 \code
@@ -268,13 +268,13 @@ operator<<( std::ostream & to, const A & a )
 void f()
 {
 	A a;
-	std::string str_a( cpp_util_2::lexcast< std::string >( a ) );
+	std::string str_a( cpp_util_3::lexcast< std::string >( a ) );
 }
 \endcode
 
 	Но проблема в том, что в str_a будет содержаться только "m_a:",
 	т.к. оператор >> для std::string извлекает значения из промежуточного
-	std::stringstream в cpp_util_2::lexcast() только до первого пробела.
+	std::stringstream в cpp_util_3::lexcast() только до первого пробела.
 
 	Функция slexcast() решает эту проблему и позволяет поместить
 	в str_a все содержимое промежуточного std::stringstream. В приведенном
@@ -283,7 +283,7 @@ void f()
 void f()
 {
 	A a;
-	std::string str_a( cpp_util_2::slexcast( a ) );
+	std::string str_a( cpp_util_3::slexcast( a ) );
 }
 \endcode
 */
@@ -326,5 +326,5 @@ slexcast(
 	return ss.str();
 }
 
-} /* namespace cpp_util_2 */
+} /* namespace cpp_util_3 */
 

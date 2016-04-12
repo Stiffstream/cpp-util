@@ -20,13 +20,13 @@ restrictions:
 */
 
 /*!
-	\file cpp_util_2/h/nocopy.hpp
-	\brief Класс cpp_util_2::nocopy_t
+	\file
+	\brief Класс cpp_util_3::nocopy_t
 */
 
 #pragma once
 
-namespace cpp_util_2
+namespace cpp_util_3
 {
 
 //
@@ -43,7 +43,7 @@ namespace cpp_util_2
 	Пример использования:
 
 	\code
-	class	my_smart_ptr_t : private cpp_util_2::nocopy_t
+	class	my_smart_ptr_t : private cpp_util_3::nocopy_t
 	{
 		private :
 			// Из-за этого указателя объекты my_smart_ptr_t
@@ -57,7 +57,7 @@ namespace cpp_util_2
 	\endcode
 
 	Благодоря закрытому наследованию нельзя преобразовать
-	my_smart_ptr_t * к cpp_util_2::nocopy_t.
+	my_smart_ptr_t * к cpp_util_3::nocopy_t.
 */
 class	nocopy_t
 {
@@ -71,5 +71,5 @@ class	nocopy_t
 		operator=( const nocopy_t & );
 };
 
-} /*cpp_util_2 */
+} /*cpp_util_3 */
 

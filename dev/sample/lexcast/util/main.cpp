@@ -1,5 +1,5 @@
 /*
-	Пример работы со средствами из cpp_util_2/lexcast/h/util.hpp.
+	Пример работы со средствами из cpp_util_3/lexcast/h/util.hpp.
 */
 
 #include <map>
@@ -9,14 +9,14 @@
 #include <stdexcept>
 #include <climits>
 
-#include <cpp_util_2/lexcasts/h/util.hpp>
+#include <cpp_util_3/lexcasts/h/util.hpp>
 
-// Демонстрация работы cpp_util_2::slexcast.
+// Демонстрация работы cpp_util_3::slexcast.
 void
 slexcast_demo()
 {
 	std::string pre( "This is string with spaces." );
-	std::string	post( cpp_util_2::slexcast( pre ) );
+	std::string	post( cpp_util_3::slexcast( pre ) );
 
 	std::cout << "*** slexcast_demo:\n\tpre: "
 		<< pre << "\n\tpost: " << post << "\n" << std::endl;
@@ -44,124 +44,124 @@ hex_putter_demo()
 	unsigned long ul = 16;
 
 	std::cout << "*** hex_putter_demo:\n\t"
-		<< static_cast<int>(c1) << " " << cpp_util_2::slexcast( c1,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( c1,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( c1,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< static_cast<int>(c1) << " " << cpp_util_3::slexcast( c1,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( c1,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( c1,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< static_cast<int>(c2) << " " << cpp_util_2::slexcast( c2,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( c2,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( c2,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< static_cast<int>(c2) << " " << cpp_util_3::slexcast( c2,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( c2,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( c2,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< static_cast<int>(c_negative) << " " << cpp_util_2::slexcast( c_negative,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( c_negative,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( c_negative,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< static_cast<int>(c_negative) << " " << cpp_util_3::slexcast( c_negative,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( c_negative,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( c_negative,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< static_cast<unsigned int>(uc) << " " << cpp_util_2::slexcast( uc,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( uc,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( uc,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< static_cast<unsigned int>(uc) << " " << cpp_util_3::slexcast( uc,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( uc,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( uc,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< s << " " << cpp_util_2::slexcast( s,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( s,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( s,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< s << " " << cpp_util_3::slexcast( s,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( s,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( s,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< s_negative << " " << cpp_util_2::slexcast( s_negative,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( s_negative,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( s_negative,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< s_negative << " " << cpp_util_3::slexcast( s_negative,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( s_negative,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( s_negative,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< us << " " << cpp_util_2::slexcast( us,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( us,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( us,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< us << " " << cpp_util_3::slexcast( us,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( us,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( us,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< i << " " << cpp_util_2::slexcast( i,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( i,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( i,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< i << " " << cpp_util_3::slexcast( i,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( i,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( i,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< i_negative << " " << cpp_util_2::slexcast( i_negative,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( i_negative,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( i_negative,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< i_negative << " " << cpp_util_3::slexcast( i_negative,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( i_negative,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( i_negative,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< ui << " " << cpp_util_2::slexcast( ui,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( ui,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( ui,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< ui << " " << cpp_util_3::slexcast( ui,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( ui,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( ui,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< l << " " << cpp_util_2::slexcast( l,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( l,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( l,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< l << " " << cpp_util_3::slexcast( l,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( l,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( l,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< l_negative << " " << cpp_util_2::slexcast( l_negative,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( l_negative,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( l_negative,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< l_negative << " " << cpp_util_3::slexcast( l_negative,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( l_negative,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( l_negative,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< ul << " " << cpp_util_2::slexcast( ul,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( ul,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( ul,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< ul << " " << cpp_util_3::slexcast( ul,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( ul,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( ul,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< 127 << " " << cpp_util_2::slexcast( 127,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( 127,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( 127,
-			cpp_util_2::lexcasts::hex_bslashx() )
+		<< 127 << " " << cpp_util_3::slexcast( 127,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( 127,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( 127,
+			cpp_util_3::lexcasts::hex_bslashx() )
 		<< "\n\t"
 
-		<< -127 << " " << cpp_util_2::slexcast( -127,
-			cpp_util_2::lexcasts::hex() ) << ", "
-		<< cpp_util_2::slexcast( -127,
-			cpp_util_2::lexcasts::hex_0x() ) << ", "
-		<< cpp_util_2::slexcast( -127,
-			cpp_util_2::lexcasts::hex_bslashx() ) << "\n"
+		<< -127 << " " << cpp_util_3::slexcast( -127,
+			cpp_util_3::lexcasts::hex() ) << ", "
+		<< cpp_util_3::slexcast( -127,
+			cpp_util_3::lexcasts::hex_0x() ) << ", "
+		<< cpp_util_3::slexcast( -127,
+			cpp_util_3::lexcasts::hex_bslashx() ) << "\n"
 		<< std::endl;
 }
 
@@ -173,15 +173,15 @@ hex_getter_demo()
 
 	std::string hex8( "f3" );
 
-	char c = cpp_util_2::lexcast< char >( hex8,
-		cpp_util_2::lexcasts::def_putter(),
-		cpp_util_2::lexcasts::hex_getter() );
-	signed char sc = cpp_util_2::lexcast< signed char >( hex8,
-		cpp_util_2::lexcasts::def_putter(),
-		cpp_util_2::lexcasts::hex_getter() );
-	unsigned char uc = cpp_util_2::lexcast< unsigned char >( hex8,
-		cpp_util_2::lexcasts::def_putter(),
-		cpp_util_2::lexcasts::hex_getter() );
+	char c = cpp_util_3::lexcast< char >( hex8,
+		cpp_util_3::lexcasts::def_putter(),
+		cpp_util_3::lexcasts::hex_getter() );
+	signed char sc = cpp_util_3::lexcast< signed char >( hex8,
+		cpp_util_3::lexcasts::def_putter(),
+		cpp_util_3::lexcasts::hex_getter() );
+	unsigned char uc = cpp_util_3::lexcast< unsigned char >( hex8,
+		cpp_util_3::lexcasts::def_putter(),
+		cpp_util_3::lexcasts::hex_getter() );
 
 	std::cout << "\n\thex8: " << hex8
 		<< "\n\tchar: " << static_cast<short>(c)
@@ -191,18 +191,18 @@ hex_getter_demo()
 
 	std::string	hex16( "ff5d" );
 
-	short s = cpp_util_2::lexcast< short >( hex16,
-		cpp_util_2::lexcasts::def_putter(),
-		cpp_util_2::lexcasts::hex_getter() );
-	unsigned short us = cpp_util_2::lexcast< unsigned short >( hex16,
-		cpp_util_2::lexcasts::def_putter(),
-		cpp_util_2::lexcasts::hex_getter() );
-	int i = cpp_util_2::lexcast< int >( hex16,
-		cpp_util_2::lexcasts::def_putter(),
-		cpp_util_2::lexcasts::hex_getter() );
-	unsigned int ui = cpp_util_2::lexcast< unsigned int >( hex16,
-		cpp_util_2::lexcasts::def_putter(),
-		cpp_util_2::lexcasts::hex_getter() );
+	short s = cpp_util_3::lexcast< short >( hex16,
+		cpp_util_3::lexcasts::def_putter(),
+		cpp_util_3::lexcasts::hex_getter() );
+	unsigned short us = cpp_util_3::lexcast< unsigned short >( hex16,
+		cpp_util_3::lexcasts::def_putter(),
+		cpp_util_3::lexcasts::hex_getter() );
+	int i = cpp_util_3::lexcast< int >( hex16,
+		cpp_util_3::lexcasts::def_putter(),
+		cpp_util_3::lexcasts::hex_getter() );
+	unsigned int ui = cpp_util_3::lexcast< unsigned int >( hex16,
+		cpp_util_3::lexcasts::def_putter(),
+		cpp_util_3::lexcasts::hex_getter() );
 
 	std::cout << "\n\thex16: " << hex16
 		<< "\n\tshort: " << s
@@ -213,18 +213,18 @@ hex_getter_demo()
 
 	std::string	hex32( "ffffff5d" );
 
-	int i32 = cpp_util_2::lexcast< int >( hex32,
-		cpp_util_2::lexcasts::def_putter(),
-		cpp_util_2::lexcasts::hex_getter() );
-	unsigned int ui32 = cpp_util_2::lexcast< unsigned int >( hex32,
-		cpp_util_2::lexcasts::def_putter(),
-		cpp_util_2::lexcasts::hex_getter() );
-	long l = cpp_util_2::lexcast< long >( hex32,
-		cpp_util_2::lexcasts::def_putter(),
-		cpp_util_2::lexcasts::hex_getter() );
-	unsigned long ul = cpp_util_2::lexcast< unsigned int >( hex32,
-		cpp_util_2::lexcasts::def_putter(),
-		cpp_util_2::lexcasts::hex_getter() );
+	int i32 = cpp_util_3::lexcast< int >( hex32,
+		cpp_util_3::lexcasts::def_putter(),
+		cpp_util_3::lexcasts::hex_getter() );
+	unsigned int ui32 = cpp_util_3::lexcast< unsigned int >( hex32,
+		cpp_util_3::lexcasts::def_putter(),
+		cpp_util_3::lexcasts::hex_getter() );
+	long l = cpp_util_3::lexcast< long >( hex32,
+		cpp_util_3::lexcasts::def_putter(),
+		cpp_util_3::lexcasts::hex_getter() );
+	unsigned long ul = cpp_util_3::lexcast< unsigned int >( hex32,
+		cpp_util_3::lexcasts::def_putter(),
+		cpp_util_3::lexcasts::hex_getter() );
 
 	std::cout << "\n\thex32: " << hex32
 		<< " (int=" << sizeof(int)*CHAR_BIT << "bits, long="
@@ -237,7 +237,7 @@ hex_getter_demo()
 }
 
 // Преобразование значений контейнера с
-// использованием cpp_util_2::slexcast().
+// использованием cpp_util_3::slexcast().
 void
 container_putter_demo()
 {
@@ -245,15 +245,15 @@ container_putter_demo()
 
 	// Печать всех значений из массива.
 	unsigned int ui[ 8 ] = { 18, 17, 16, 15, 14, 13, 12, 10 };
-	std::cout << cpp_util_2::slexcast(
-			cpp_util_2::lexcasts::all(
+	std::cout << cpp_util_3::slexcast(
+			cpp_util_3::lexcasts::all(
 				ui, ui + ( sizeof(ui) / sizeof(ui[0]) ) ) )
 		<< std::endl;
 	// То же самое, но в шестнадцатиричном виде.
-	std::cout << cpp_util_2::slexcast(
-			cpp_util_2::lexcasts::all(
+	std::cout << cpp_util_3::slexcast(
+			cpp_util_3::lexcasts::all(
 				ui, ui + ( sizeof(ui) / sizeof(ui[0]) ), " ",
-				cpp_util_2::lexcasts::hex() ) )
+				cpp_util_3::lexcasts::hex() ) )
 		<< std::endl;
 
 	// Печать всех значений вектора строк, разделяя каждое значение
@@ -265,26 +265,26 @@ container_putter_demo()
 	ss.insert( "EEE" );
 	ss.insert( "DDD" );
 #if !defined( __BORLANDC__ )
-	std::cout << cpp_util_2::slexcast(
-			cpp_util_2::lexcasts::all( ss.begin(), ss.end(), "\n" ) )
+	std::cout << cpp_util_3::slexcast(
+			cpp_util_3::lexcasts::all( ss.begin(), ss.end(), "\n" ) )
 		<< std::endl;
 #endif
 
 	// Еще раз, но проще.
-	std::cout << cpp_util_2::slexcast(
-			cpp_util_2::lexcasts::all( ss, "\n" ) )
+	std::cout << cpp_util_3::slexcast(
+			cpp_util_3::lexcasts::all( ss, "\n" ) )
 		<< std::endl;
 
 	// Отображаем каждый символ строки в шестнадцатиричном виде.
 	std::string hello( "Hello, World" );
 	std::cout << "ASCII string: " << hello
-		<< "\nHex string: " << cpp_util_2::slexcast(
-			cpp_util_2::lexcasts::all( hello.begin(), hello.end(), "",
-				cpp_util_2::lexcasts::hex_bslashx() ) )
+		<< "\nHex string: " << cpp_util_3::slexcast(
+			cpp_util_3::lexcasts::all( hello.begin(), hello.end(), "",
+				cpp_util_3::lexcasts::hex_bslashx() ) )
 		// Печатаем тоже самое, но проще.
-		<< "\nHex string 2: "<< cpp_util_2::slexcast(
-			cpp_util_2::lexcasts::all( hello, "",
-				cpp_util_2::lexcasts::hex_bslashx() ) )
+		<< "\nHex string 2: "<< cpp_util_3::slexcast(
+			cpp_util_3::lexcasts::all( hello, "",
+				cpp_util_3::lexcasts::hex_bslashx() ) )
 		<< std::endl;
 }
 

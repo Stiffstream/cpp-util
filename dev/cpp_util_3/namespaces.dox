@@ -1,8 +1,8 @@
-//! Основное пространство имен проекта %cpp_util_2.
-namespace	cpp_util_2
+//! Основное пространство имен проекта %cpp_util_3.
+namespace	cpp_util_3
 {
 
-	//! Детали реализации проекта %cpp_util_2.
+	//! Детали реализации проекта %cpp_util_3.
 	namespace	impl
 	{}
 

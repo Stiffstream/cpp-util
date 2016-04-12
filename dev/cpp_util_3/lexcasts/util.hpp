@@ -28,10 +28,10 @@ restrictions:
 
 #pragma once
 
-#include <cpp_util_2/h/nocopy.hpp>
-#include <cpp_util_2/h/lexcast.hpp>
+#include <cpp_util_3/h/nocopy.hpp>
+#include <cpp_util_3/h/lexcast.hpp>
 
-namespace	cpp_util_2
+namespace	cpp_util_3
 {
 
 namespace	lexcasts
@@ -166,11 +166,11 @@ struct	def_putter
 
 	Для того, чтобы получить в строке шестнадцатиричное представление
 	числа можно воспользоваться классом hex_t в качестве
-	объекта-значения для cpp_util_2::lexcast():
+	объекта-значения для cpp_util_3::lexcast():
 \code
 unsigned int ui = 2378;
 std::string str_hex_ui(
-	cpp_util_2::slexcast( ui, cpp_util_2::lexcasts::hex() ) );
+	cpp_util_3::slexcast( ui, cpp_util_3::lexcasts::hex() ) );
 \endcode
 
 */
@@ -243,11 +243,11 @@ class prefixed_hex
 	Для того, чтобы получить в строке шестнадцатиричное представление
 	числа, которое начинается со стандартного C/C++ префикса 0x,
 	можно воспользоваться классом hex_0x в качестве
-	объекта-значения для cpp_util_2::lexcast():
+	объекта-значения для cpp_util_3::lexcast():
 \code
 unsigned int ui = 2378;
-std::string str_hex_ui( cpp_util_2::slexcast( ui,
-	cpp_util_2::lexcasts::hex_0x() ) );
+std::string str_hex_ui( cpp_util_3::slexcast( ui,
+	cpp_util_3::lexcasts::hex_0x() ) );
 \endcode
 */
 class	hex_0x
@@ -271,11 +271,11 @@ class	hex_0x
 	Для того, чтобы получить в строке шестнадцатиричное представление
 	числа, которое начинается со стандартного C/C++ префикса \\x,
 	можно воспользоваться классом hex_bslashx_t в качестве
-	объекта-значения для cpp_util_2::lexcast():
+	объекта-значения для cpp_util_3::lexcast():
 \code
 unsigned int ui = 2378;
-std::string str_hex_ui( cpp_util_2::slexcast( ui,
-	cpp_util_2::lexcasts::hex_bslashx() ) );
+std::string str_hex_ui( cpp_util_3::slexcast( ui,
+	cpp_util_3::lexcasts::hex_bslashx() ) );
 \endcode
 
 */
@@ -298,12 +298,12 @@ class	hex_bslashx
 
 	Для того, чтобы извлечь из строкого шестнадцатиричное представление
 	числа значение можно воспользоваться классом hex_getter в качестве
-	объекта-извлекателя для cpp_util_2::lexcast():
+	объекта-извлекателя для cpp_util_3::lexcast():
 \code
-unsigned int ui = cpp_util_2::lexcast< unsigned int >(
+unsigned int ui = cpp_util_3::lexcast< unsigned int >(
 	std::string( "ff5d" ),
-	cpp_util_2::lexcasts::def_putter(),
-	cpp_util_2::lexcasts::hex_getter() );
+	cpp_util_3::lexcasts::def_putter(),
+	cpp_util_3::lexcasts::hex_getter() );
 \endcode
 
 */
@@ -329,7 +329,7 @@ struct hex_getter
 //! на которые указывают итераторы.
 /*!
 	\since v.2.0.3
-	\sa	cpp_util_2::lexcasts::all().
+	\sa	cpp_util_3::lexcasts::all().
 */
 template< class It >
 struct	all_t
@@ -389,15 +389,15 @@ operator<<( std::ostream & to, const all_t< It > & what )
 \code
 // Печать всех значений из массива.
 unsigned int ui[ 64 ] = { ... };
-std::cout << cpp_util_2::slexcast(
-	cpp_util_2::lexcasts::all( ui, ui + ( sizeof(ui) / sizeof(ui[0]) ) ) );
+std::cout << cpp_util_3::slexcast(
+	cpp_util_3::lexcasts::all( ui, ui + ( sizeof(ui) / sizeof(ui[0]) ) ) );
 
 // Печать всех значений вектора строк, разделяя каждое значение
 // переводом строки.
 std::set< std::string >	ss;
 ...
-std::cout << cpp_util_2::slexcast(
-	cpp_util_2::lexcasts::all( ss.begin(), ss.end(), "\n" ) );
+std::cout << cpp_util_3::slexcast(
+	cpp_util_3::lexcasts::all( ss.begin(), ss.end(), "\n" ) );
 \endcode
 
 	\note После последнего элемента разделитель не печатается.
@@ -417,7 +417,7 @@ all( It b, It e, const std::string & sep = " " )
 //! на которые указывают итераторы.
 /*!
 	\since v.2.0.3
-	\sa	cpp_util_2::lexcasts::all().
+	\sa	cpp_util_3::lexcasts::all().
 */
 template< class Cont >
 struct	all_cont_t
@@ -473,8 +473,8 @@ operator<<( std::ostream & to, const all_cont_t< Cont > & what )
 // переводом строки.
 std::set< std::string >	ss;
 ...
-std::cout << cpp_util_2::slexcast(
-	cpp_util_2::lexcasts::all( ss, "\n" ) );
+std::cout << cpp_util_3::slexcast(
+	cpp_util_3::lexcasts::all( ss, "\n" ) );
 \endcode
 
 	\attention В типе \a Cont должен быть определен тип \b const_iterator.
@@ -496,7 +496,7 @@ all( const Cont & c, const std::string & sep = " " )
 //! на которые указывают итераторы.
 /*!
 	\since v.2.0.3
-	\sa	cpp_util_2::lexcasts::all().
+	\sa	cpp_util_3::lexcasts::all().
 */
 template< class It, class Putter >
 struct	all_using_t
@@ -561,9 +561,9 @@ operator<<( std::ostream & to,
 \code
 // Печать всех значений из массива.
 unsigned int ui[ 64 ] = { ... };
-std::cout << cpp_util_2::slexcast(
-	cpp_util_2::lexcasts::all( ui, ui + ( sizeof(ui) / sizeof(ui[0]) ),
-		" ", cpp_util_2::lexcasts::hex_0x() ) );
+std::cout << cpp_util_3::slexcast(
+	cpp_util_3::lexcasts::all( ui, ui + ( sizeof(ui) / sizeof(ui[0]) ),
+		" ", cpp_util_3::lexcasts::hex_0x() ) );
 \endcode
 
 	\note После последнего элемента разделитель не печатается.
@@ -586,9 +586,9 @@ all( It b, It e, const std::string & sep, Putter putter )
 \code
 // Печать шестнадцатиричного представления каждого символа строки.
 std::string hello( "Hello!" );
-std::cout << cpp_util_2::slexcast(
-	cpp_util_2::lexcasts::all( hello, "",
-		cpp_util_2::lexcasts::hex_bslashx() ) );
+std::cout << cpp_util_3::slexcast(
+	cpp_util_3::lexcasts::all( hello, "",
+		cpp_util_3::lexcasts::hex_bslashx() ) );
 \endcode
 
 	\note После последнего элемента разделитель не печатается.
@@ -616,5 +616,5 @@ all( const Cont &c, const std::string & sep, Putter putter )
 
 } /* namespace lexcasts */
 
-} /* namespace cpp_util_2 */
+} /* namespace cpp_util_3 */
 

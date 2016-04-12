@@ -1,5 +1,5 @@
 /*
- * cpp_util_2
+ * cpp_util_3
  */
 
 /*!
@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include <cpp_util_2/h/lexcast.hpp>
+#include <cpp_util_3/h/lexcast.hpp>
 
 #include <iostream>
 #include <stdexcept>
@@ -24,7 +24,7 @@ check_and_throw(
 	{
 		if( !check_result )
 			throw std::runtime_error(
-					file + ":" + cpp_util_2::slexcast( line ) + ": '" +
+					file + ":" + cpp_util_3::slexcast( line ) + ": '" +
 					condition + "' failed!" );
 	}
 
@@ -54,7 +54,7 @@ do \
 		if( !exception_thrown__ ) \
 			throw std::runtime_error( \
 					std::string( file ) + ":" + \
-					cpp_util_2::slexcast( line ) + ": " + \
+					cpp_util_3::slexcast( line ) + ": " + \
 					std::string( "expected: " ) + #exception_class + \
 					" but nothing thrown" ); \
 	} \

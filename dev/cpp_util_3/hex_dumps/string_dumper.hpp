@@ -1,5 +1,5 @@
 /*
- * cpp_util_2
+ * cpp_util_3
  */
 
 /*!
@@ -22,9 +22,9 @@
 #include <string>
 #include <vector>
 
-#include <cpp_util_2/h/string_piece.hpp>
+#include <cpp_util_3/h/string_piece.hpp>
 
-namespace cpp_util_2 {
+namespace cpp_util_3 {
 
 namespace hex_dumps {
 
@@ -36,7 +36,7 @@ namespace hex_dumps {
  * Пример использования:
  * \code
  * std::string s( "hello, world" );
- * std::cout << cpp_util_2::hex_dumps::string_dumper( s ) << std::endl;
+ * std::cout << cpp_util_3::hex_dumps::string_dumper( s ) << std::endl;
  * \endcode
  *
  * \par v.2.3.1
@@ -103,7 +103,7 @@ operator<<( std::ostream & to, const string_dumper & s )
  * Пример использования:
  * \code
  * std::string s( "hello, world" );
- * std::cout << cpp_util_2::hex_dumps::hex_escaped_string_dumper( s )
+ * std::cout << cpp_util_3::hex_dumps::hex_escaped_string_dumper( s )
  * 		<< std::endl;
  * \endcode
  */
@@ -175,7 +175,7 @@ operator<<( std::ostream & to, const hex_escaped_string_dumper & s )
  * Пример использования:
  * \code
  * std::string s( "hello, world" );
- * std::cout << cpp_util_2::hex_dumps::string_dumper_without_spaces( s )
+ * std::cout << cpp_util_3::hex_dumps::string_dumper_without_spaces( s )
  * 		<< std::endl;
  * \endcode
  */
@@ -227,7 +227,7 @@ operator<<( std::ostream & to, const string_dumper_without_spaces & s )
 
 } /* namespace hex_dumps */
 
-} /* namespace cpp_util_2 */
+} /* namespace cpp_util_3 */
 
 #if defined( CPP_UTIL_2_MSC_CRT_SECURE_NO_WARNINGS_ON )
 	#undef CPP_UTIL_2_MSC_CRT_SECURE_NO_WARNINGS_ON

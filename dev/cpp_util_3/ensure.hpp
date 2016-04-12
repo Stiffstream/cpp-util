@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace cpp_util_2 {
+namespace cpp_util_3 {
 
 /*!
  * \brief Helper for ensuring validity of some condition.
@@ -16,7 +16,7 @@ namespace cpp_util_2 {
  * \code
 	auto r = mosquitto_subscribe( m_mosq.get(),
 			&mid, topic_name.c_str(), qos_to_use );
-	cpp_util_2::ensure< ex_t >(
+	cpp_util_3::ensure< ex_t >(
 			MOSQ_ERR_SUCCESS == r ||
 			MOSQ_ERR_NO_CONN == r ||
 			MOSQ_ERR_CONN_LOST == r,

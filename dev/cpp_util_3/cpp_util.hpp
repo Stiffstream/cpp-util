@@ -20,11 +20,9 @@ restrictions:
 */
 
 /*!
-	\file cpp_util_2/h/cpp_util.hpp
-	\brief Общий файл для всех макросов.
-
-	Подключает файлы с определениями основных макросов.
+	\file
+	\brief Common file for all macros.
 */
 
-#include <cpp_util_2/h/defs.hpp>
-#include <cpp_util_2/h/detect_compiler.hpp>
+#include <cpp_util_3/h/defs.hpp>
+#include <cpp_util_3/h/detect_compiler.hpp>

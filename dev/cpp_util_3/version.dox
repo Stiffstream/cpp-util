@@ -1,7 +1,7 @@
 /*!
-\page	cpp_util_2__version	cpp_util_2: Version changes.
+\page	cpp_util_3__version	cpp_util_2: Version changes.
 
-\section cpp_util_2__2_7_2 2.7.2
+\section cpp_util_3__2_7_2 2.7.2
 
 	2016.04.12
 
@@ -11,7 +11,7 @@
 
 	cpp_util_2::ensure() added.
 
-\section cpp_util_2__2_7_0 2.7.0
+\section cpp_util_3__2_7_0 2.7.0
 
 	2013.08.03
 
@@ -20,13 +20,13 @@
 	Macro CPP_UTIL_2_WINDOWS added. This macro is defined if
 	CPP_UTIL_2_WIN32 or CPP_UTIL_2_WIN64 is defined.
 
-\section cpp_util_2__2_6_0 2.6.0
+\section cpp_util_3__2_6_0 2.6.0
 
 	2010.11.15
 
 	Добавлен cpp_util_2::hex_dumps::string_dumper_without_spaces.
 
-\section cpp_util_2__2_5_0 2.5.0
+\section cpp_util_3__2_5_0 2.5.0
 
 	2008.08.21, 2008.09.05
 
@@ -40,7 +40,7 @@
 	
 	Добавлена функция cpp_util::string_literal().
 
-\section cpp_util_2__2_4_0 2.4.0
+\section cpp_util_3__2_4_0 2.4.0
 
 	2008.06.17, 2008.06.23
 
@@ -48,7 +48,7 @@
 
 	Добавлен класс cpp_util_2::temporary_object_ref_t.
 
-\section cpp_util_2__2_3_1 2.3.1
+\section cpp_util_3__2_3_1 2.3.1
 
 	2008.01.23
 
@@ -59,7 +59,7 @@
 
 	Добавлен класс cpp_util_2::hex_dumps::hex_escaped_string_dumper.
 
-\section cpp_util_2__2_3_0 2.3.0
+\section cpp_util_3__2_3_0 2.3.0
 
 	2007.12.15
 
@@ -67,13 +67,13 @@
 
 	Создан класс cpp_util_2::hex_dumps::string_dumper.
 
-\section	cpp_util_2__2_2_0	2.2.0
+\section	cpp_util_3__2_2_0	2.2.0
 
 	2004.09.10
 
 	Переход на mxx_ru.
 
-\section	cpp_util_2__2_1_0	2.1.0
+\section	cpp_util_3__2_1_0	2.1.0
 
 	2004.02.18
 	
@@ -86,7 +86,7 @@
 	
 	Добавлен класс cpp_util_2::lexcasts::def_putter.
 
-\section	cpp_util_2__2_0_3	2.0.3
+\section	cpp_util_3__2_0_3	2.0.3
 
 	2004.01.11, 2004.01.14
 	
@@ -108,16 +108,17 @@
 	Добавлен класс cpp_util_2::lexcasts::string_getter_t и
 	функция cpp_util_2::lexcasts::string_getter().
 
-\section	cpp_util_2__2_0_2	2.0.2
+\section	cpp_util_3__2_0_2	2.0.2
 
 	2003.12.27
 	
 	Добавлена функция cpp_util_2::lexcast().
 
-\section	cpp_util_2__2_0_1	2.0.1
+\section	cpp_util_3__2_0_1	2.0.1
 
 	2003.11.20
 	
 	Добавлены классы cpp_util_2::unary_method_t,
 	cpp_util_2::const_unary_method_t.
 */
+

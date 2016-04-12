@@ -10,7 +10,7 @@
 
 #include <utility>
 
-namespace cpp_util_2 {
+namespace cpp_util_3 {
 
 namespace scope_exit_details {
 
@@ -56,5 +56,5 @@ at_scope_exit( L && l )
 		return scope_exit_details::at_exit_t<L>{ std::forward<L>(l) };
 	}
 
-} /* namespace cpp_util_2 */
+} /* namespace cpp_util_3 */
 

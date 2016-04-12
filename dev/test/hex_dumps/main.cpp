@@ -2,13 +2,13 @@
  * Тестирование string_dumper-а.
  */
 
-#include <cpp_util_2/hex_dumps/h/string_dumper.hpp>
+#include <cpp_util_3/hex_dumps/h/string_dumper.hpp>
 
 #include <test/h/helpers.hpp>
 
 #include <sstream>
 
-using namespace cpp_util_2::hex_dumps;
+using namespace cpp_util_3::hex_dumps;
 
 void
 test_empty_string()

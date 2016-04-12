@@ -1,5 +1,5 @@
 /*
- * cpp_util_2
+ * cpp_util_3
  */
 
 /*!
@@ -11,7 +11,7 @@
 #if !defined( CPP_UTIL_2__TEMPORARY_OBJECT_REF_HPP )
 #define CPP_UTIL_2__TEMPORARY_OBJECT_REF_HPP
 
-namespace cpp_util_2
+namespace cpp_util_3
 {
 
 //
@@ -129,7 +129,7 @@ make_temporary_object_ref( T & o )
 		return temporary_object_ref_t< T >( o );
 	}
 
-} /* namespace cpp_util_2 */
+} /* namespace cpp_util_3 */
 
 #endif
 

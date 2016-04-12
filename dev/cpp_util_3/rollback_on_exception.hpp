@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace cpp_util_2 {
+namespace cpp_util_3 {
 
 namespace rollback_on_exception_details {
 
@@ -74,7 +74,7 @@ struct executor< void, MAIN_ACTION, ROLLBACK_ACTION >
 	// must be removed from the first container if insertion into
 	// the second container fails.
 	all_files.insert( file_info );
-	cpp_util_2::do_with_rollback_on_exception(
+	cpp_util_3::do_with_rollback_on_exception(
 		[&]{ new_files.insert( file_info ); },
 		[&]{ all.files.erase( file_info ); } );
  * \endcode
@@ -85,7 +85,7 @@ struct executor< void, MAIN_ACTION, ROLLBACK_ACTION >
 	std::size_t store_file_info( const file_info_t & file_info )
 	{
 		all_files.insert( file_info );
-		return cpp_util_2::do_with_rollback_on_exception(
+		return cpp_util_3::do_with_rollback_on_exception(
 			[&]{
 				new_files.insert( file_info );
 				// return total count of file infos.
@@ -118,5 +118,5 @@ do_with_rollback_on_exception(
 				main_action, rollbacker );
 	}
 
-} /* namespace cpp_util_2 */
+} /* namespace cpp_util_3 */
 
