@@ -2,8 +2,9 @@ namespace cpp_util_3
 {
 
 /*!
- * \since v.2.3.0
- * \brief ѕространство имен дл€ средств формировани€ шестнадцатиричных дампов.
+ * \since
+ * v.2.3.0
+ * \brief Namespace for tools for hex dumps.
  */
 namespace hex_dumps
 {

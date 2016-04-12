@@ -1,5 +1,16 @@
 /*!
-\page	cpp_util_3__version	cpp_util_2: Version changes.
+\page	cpp_util_3__version	cpp_util_3: Version changes.
+
+\section cpp_util_3__3_0_0 3.0.0
+
+	2016.04.13
+
+	Root namespace name changed to cpp_util_3.
+
+	Some ancient stuff removed.
+
+	Methods cpp_util_3::string_piece_t::begin(),
+	cpp_util_3::string_piece_t::end() added.
 
 \section cpp_util_3__2_7_2 2.7.2
 
@@ -24,101 +35,98 @@
 
 	2010.11.15
 
-	Добавлен cpp_util_2::hex_dumps::string_dumper_without_spaces.
+	cpp_util_2::hex_dumps::string_dumper_without_spaces added.
 
 \section cpp_util_3__2_5_0 2.5.0
 
 	2008.08.21, 2008.09.05
 
-	Из класса cpp_util_2::string_piece_t удалены шаблонные конструкторы
-	для того, чтобы не было проблем в обработке ситуаций:
+	Template constructors are removed from cpp_util_2::string_piece_t.
+	This necessary to correct work in the following cases:
 	\code
 	char tmp[ 32 ];
 	cpp_util_2::string_piece_t a( tmp );
 	cpp_util_2::string_piece_t b( "aaa" );
 	\endcode
 	
-	Добавлена функция cpp_util::string_literal().
+	Function cpp_util::string_literal() added.
 
 \section cpp_util_3__2_4_0 2.4.0
 
 	2008.06.17, 2008.06.23
 
-	Реорганизация класса string_piece_t.
+	Refactoring of cpp_util_2::string_piece_t.
 
-	Добавлен класс cpp_util_2::temporary_object_ref_t.
+	Class cpp_util_2::temporary_object_ref_t added.
 
 \section cpp_util_3__2_3_1 2.3.1
 
 	2008.01.23
 
-	Создан класс string_piece_t.
+	Class string_piece_t added.
 
-	Средства из cpp_util_2::hex_dumps теперь используют string_piece_t,
-	что позволяет использовать их не только с std::string.
+	Tools cpp_util_2::hex_dumps use string_piece_t now.
 
-	Добавлен класс cpp_util_2::hex_dumps::hex_escaped_string_dumper.
+	Class cpp_util_2::hex_dumps::hex_escaped_string_dumper added.
 
 \section cpp_util_3__2_3_0 2.3.0
 
 	2007.12.15
 
-	Создано пространство имен cpp_util_2::hex_dumps.
+	Namespace cpp_util_2::hex_dumps added.
 
-	Создан класс cpp_util_2::hex_dumps::string_dumper.
+	Class cpp_util_2::hex_dumps::string_dumper added.
 
 \section	cpp_util_3__2_2_0	2.2.0
 
 	2004.09.10
 
-	Переход на mxx_ru.
+	Switching to mxx_ru.
 
 \section	cpp_util_3__2_1_0	2.1.0
 
 	2004.02.18
 	
-	Преобразование и упрощение функций cpp_util_2::lexcast(), cpp_util_2::slexcast().
+	Refactoring of cpp_util_2::lexcast(), cpp_util_2::slexcast().
 	
-	Преобразование и упрощение средств из пространства имен cpp_util_2::lexcasts:
+	Refactoring of tools from cpp_util_2::lexcasts:
 	- cpp_util_2::lexcasts::hex;
 	- cpp_util_2::lexcasts::prefixed_hex, cpp_util_2::lexcasts::hex_0x,
 	cpp_util_2::lexcasts::hex_bslashx.
 	
-	Добавлен класс cpp_util_2::lexcasts::def_putter.
+	Class cpp_util_2::lexcasts::def_putter added.
 
 \section	cpp_util_3__2_0_3	2.0.3
 
 	2004.01.11, 2004.01.14
 	
-	Добавлены функции cpp_util_2::slexcast().
+	Functions cpp_util_2::slexcast() added.
 	
-	Добавлены функции cpp_util_2::lexcasts::all(), упрощающие преобразование
-	векторов и контейнеров.
+	Functions cpp_util_2::lexcasts::all() added.
 	
-	Добавлены классы cpp_util_2::lexcasts::hex_t, cpp_util_2::lexcasts::prefixed_hex_t
-	и функции cpp_util_2::lexcasts::hex_0x(), cpp_util_2::lexcasts::hex_bslashx(),
-	которые упрощают преобразование значений в шестнадцатиричное
-	представление.
+	New classes cpp_util_2::lexcasts::hex_t,
+	cpp_util_2::lexcasts::prefixed_hex_t
+	and functions cpp_util_2::lexcasts::hex_0x(),
+	cpp_util_2::lexcasts::hex_bslashx().
 	
-	Добавлены классы cpp_util_2::putter_t, cpp_util_2::getter_t
-	и несколько перегруженных вариантов функции cpp_util_2::lexcast().
+	New classes cpp_util_2::putter_t, cpp_util_2::getter_t
+	and several new overloads for cpp_util_2::lexcast().
 
-	Добавлено пространство имен cpp_util_2::lexcasts.
+	New namespace cpp_util_2::lexcasts.
 
-	Добавлен класс cpp_util_2::lexcasts::string_getter_t и
-	функция cpp_util_2::lexcasts::string_getter().
+	New class cpp_util_2::lexcasts::string_getter_t
+	and function cpp_util_2::lexcasts::string_getter().
 
 \section	cpp_util_3__2_0_2	2.0.2
 
 	2003.12.27
 	
-	Добавлена функция cpp_util_2::lexcast().
+	New function cpp_util_2::lexcast().
 
 \section	cpp_util_3__2_0_1	2.0.1
 
 	2003.11.20
 	
-	Добавлены классы cpp_util_2::unary_method_t,
-	cpp_util_2::const_unary_method_t.
+	New classes cpp_util_2::unary_method_t, cpp_util_2::const_unary_method_t.
 */
 

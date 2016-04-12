@@ -1,14 +1,14 @@
 namespace	cpp_util_3
 {
 
-	//! Дополнительные вспомогательные средства для использования
-	//! вместе с функцией %cpp_util_3::%lexcast().
+	//! Helpers for %lexcast functions family.
 	/*!
-		\since v.2.0.3
+		\since
+		v.2.0.3
 	*/
 	namespace	lexcasts
 	{
-		//! Детали реализации.
+		//! Implementation details.
 		namespace impl
 		{}
 	}

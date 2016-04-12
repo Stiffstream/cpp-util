@@ -1,9 +1,8 @@
-//! Основное пространство имен проекта %cpp_util_3.
+//! Root namespace.
 namespace	cpp_util_3
 {
 
-	//! Детали реализации проекта %cpp_util_3.
+	//! Implementation details.
 	namespace	impl
 	{}
-
 }
