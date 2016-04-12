@@ -8,7 +8,7 @@
 #include <iostream>
 #include <stdexcept>
 
-#include <cpp_util_3/h/lexcast.hpp>
+#include <cpp_util_3/lexcast.hpp>
 
 // Класс словаря, в котором оператор [] порождает
 // исключение, если элемент не найден по ключу.

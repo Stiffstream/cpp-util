@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include <cpp_util_3/h/detect_compiler.hpp>
+#include <cpp_util_3/detect_compiler.hpp>
 
 #define MACRO_CONTENT_IMPL_(M) #M
 #define MACRO_CONTENT(M) MACRO_CONTENT_IMPL_(M)

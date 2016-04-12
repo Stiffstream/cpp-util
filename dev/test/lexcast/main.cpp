@@ -1,9 +1,9 @@
 #include <string>
 #include <iostream>
 
-#include <cpp_util_3/h/lexcast.hpp>
+#include <cpp_util_3/lexcast.hpp>
 
-#include <test/h/helpers.hpp>
+#include <test/helpers.hpp>
 
 void
 to_string()

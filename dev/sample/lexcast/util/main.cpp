@@ -9,7 +9,7 @@
 #include <stdexcept>
 #include <climits>
 
-#include <cpp_util_3/lexcasts/h/util.hpp>
+#include <cpp_util_3/lexcasts/util.hpp>
 
 // Демонстрация работы cpp_util_3::slexcast.
 void

@@ -2,9 +2,9 @@
  * Testing for ensure.
  */
 
-#include <cpp_util_3/h/ensure.hpp>
+#include <cpp_util_3/ensure.hpp>
 
-#include <test/h/helpers.hpp>
+#include <test/helpers.hpp>
 
 using namespace cpp_util_3;
 

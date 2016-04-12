@@ -28,8 +28,7 @@ restrictions:
 
 #pragma once
 
-#include <cpp_util_3/h/nocopy.hpp>
-#include <cpp_util_3/h/lexcast.hpp>
+#include <cpp_util_3/lexcast.hpp>
 
 namespace	cpp_util_3
 {

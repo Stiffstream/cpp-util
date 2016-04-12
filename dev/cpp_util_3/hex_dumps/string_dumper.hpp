@@ -22,7 +22,7 @@
 #include <string>
 #include <vector>
 
-#include <cpp_util_3/h/string_piece.hpp>
+#include <cpp_util_3/string_piece.hpp>
 
 namespace cpp_util_3 {
 

@@ -2,9 +2,9 @@
  * Тестирование string_dumper-а.
  */
 
-#include <cpp_util_3/hex_dumps/h/string_dumper.hpp>
+#include <cpp_util_3/hex_dumps/string_dumper.hpp>
 
-#include <test/h/helpers.hpp>
+#include <test/helpers.hpp>
 
 #include <sstream>
 

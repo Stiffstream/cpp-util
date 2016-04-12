@@ -2,9 +2,9 @@
  * Testing for rollback_on_exception.
  */
 
-#include <cpp_util_3/h/rollback_on_exception.hpp>
+#include <cpp_util_3/rollback_on_exception.hpp>
 
-#include <test/h/helpers.hpp>
+#include <test/helpers.hpp>
 
 #include <sstream>
 

@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include <cpp_util_3/h/lexcast.hpp>
+#include <cpp_util_3/lexcast.hpp>
 
 #include <iostream>
 #include <stdexcept>

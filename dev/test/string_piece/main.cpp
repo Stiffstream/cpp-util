@@ -6,10 +6,10 @@
 
 #include <string>
 
-#include <test/h/helpers.hpp>
+#include <test/helpers.hpp>
 
 #define CPP_UTIL_STRING_PIECE_STORE_DATA_TYPE
-#include <cpp_util_3/h/string_piece.hpp>
+#include <cpp_util_3/string_piece.hpp>
 
 void check_type(
 	const cpp_util_3::string_piece_t & p,
