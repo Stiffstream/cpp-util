@@ -1,0 +1,292 @@
+/*!
+\page	cpp_util_2__lexcasts	cpp_util_2: Средства lexcasts
+
+\section	cpp_util_2__lexcasts__intro	Введение
+
+Идея создания средств cpp_util_2::lexcasts появилась после знакомства
+с проектом boost::lexical_cast. Реализация lexical_cast в boost не
+устраивала меня по нескольким причинам:
+- boost::lexical_cast порождал исключение, если преобразование
+оказывалось не корректным. Это не позволяло использовать boost::lexical_cast
+в обработчиках исключений;
+- boost::lexical_cast не позволял расширять реализацию lexical_cast. Например,
+добавлять разные типы преобразователей, обрабатывать все значения
+контейнеров и т.д. Невозможность расширения вытекала из того, что
+boost::lexical_cast не являлся моим продуктом и не я определял направления
+его развития.
+
+Между тем, сама идея средств boost::lexical_cast показалась мне очень
+интересной и полезной. Поэтому я решил реализовать подобные средства с
+учетом собственных идей и предпочтений в проекте cpp_util_2.
+
+\section	cpp_util_2__lexcasts__goat	Назначение
+
+Средства cpp_util_2::lexcasts предназначены для удобного преобразования
+различных значений в строку или из строки. Например, при обработке
+ошибок часто возникает задача преобразовать в строку одно целочисленное
+значение. Причем в десятичном и шестнадцатиричном виде:
+
+\code
+void	some_func( unsigned int param )
+{
+	...
+	if( some_error )
+	{
+		char sz[ 48 ];
+		sprintf( sz, "%u (0x%x)", param, param );
+		throw std::invalid_argument(
+			std::string( "Invalid param: " ) + sz );
+	}
+}
+\endcode
+
+Либо, аналогичный фрагмент можно было бы переписать с использованием
+std::ostringstream:
+
+\code
+void	some_func( unsigned int param )
+{
+	...
+	if( some_error )
+	{
+		std::ostringstream errs;
+		errs << param << std::hex << param;
+		throw std::invalid_argument(
+			std::string( "Invalid param: " ) + errs.str() );
+	}
+}
+\endcode
+
+Это уже лучше, чем с использованием sprintf, но все равно не удобно -- вместо
+одного оператора throw приходится писать три оператора.
+
+Применение cpp_util_2::slexcast() позволяет использовать только один оператор
+throw:
+
+\code
+void	some_func( unsigned int param )
+{
+	...
+	if( some_error )
+		throw std::invalid_argument(
+			std::string( "Invalid param: " ) +
+			cpp_util_2::slexcast( param ) + " " +
+			cpp_util_2::slexcast( param,
+				cpp_util_2::lexcasts::hex_0x() ) );
+}
+\endcode
+
+\section	cpp_util_2__lexcasts__principles	Принцип работы
+
+Принцип работы функций cpp_util_2::lexcast(), cpp_util_2::slexcast() очень
+простой: создается объект std::stringstream в который сначала "сдвигается"
+(<<) исходное значение, а затем "выдвигается" (>>) результирующее значение.
+Т.е. вызов cpp_util_2::lexcast<B>(a) можно представить в виде:
+
+\code
+std::stringstream ss;
+ss << a;
+ss.seekg( 0 );
+B b;
+ss >> b;
+\endcode
+
+В случае использования Putter-ов и Getter-ов сдвиги в/из std::stringstream
+осуществляют Putter-ы и/или Getter-ы. Т.е. для случая
+cpp_util_2::lexcast<B>(a, p, g):
+
+\code
+std::stringstream ss;
+p( ss, a );
+ss.seekg( 0 );
+B b;
+g( ss, b );
+\endcode
+
+\section	cpp_util_2__lexcasts__complex_types	Преобразование сложных типов
+
+\subsection	cpp_util_2__lexcasts__complex_types__struct	Структуры и классы
+
+Если для структуры или класса определен оператор сдвига в std::ostream,
+то cpp_util_2::lexcast() позволяет преобразовать объект этого класса в строку.
+Например:
+
+\code
+struct	my_struct_t
+{
+	int	m_a;
+	std::string	m_b;
+	float	m_c;
+};
+
+std::ostream &
+operator<<( std::ostream & to, const my_struct_t & o )
+{
+	return ( to << "my_struct_t{ m_a: " << o.m_a
+		<< ", m_b: " << o.m_b
+		<< ", m_c: " << o.m_c << "}" );
+}
+\endcode
+
+Но здесь есть подводный камень: стандартный
+<tt>operator>>(std::istream &, std::string &)</tt> считывает значение в строку
+до первого пробела. Поэтому выполнение:
+
+\code
+my_struct_t a;
+std::string b( cpp_util_2::lexcast< std::string >( a ) );
+\endcode
+
+приведет к тому, что b будет равно "my_struct_t{".
+
+Для того, чтобы результирующая строка содержала все представление
+объекта my_struct_t необходимо использовать функцию cpp_util_2::slexcast().
+Эта функция извлекает из промежуточного std::stringstream все содержимое
+не обращаясь к <tt>operator>>(std::istream &, std::string &)</tt>.
+
+\subsection	cpp_util_2__lexcasts__complex_types__containers	Контейнеры
+
+Иногда желательно преобразовать в строку содержимое какого-то контейнера.
+Для этих целей предназначены функции cpp_util_2::lexcats::all(). Например,
+если требуется отобразить все элементы std::list< int >:
+
+\code
+std::list< int > l;
+...
+std::string result( cpp_util_2::slexcast( cpp_util_2::lexcasts::all( l, " " ) ) );
+\endcode
+
+В этом случае в строку помещаются все значения, находящиеся в \a l,
+каждое значение разделяется пробелом. После последнего значения пробел
+не печается.
+
+В функцию cpp_util_2::lexcasts::all() можно передать объект Putter. Например,
+для того, чтобы отобразить все значения из \a l в шестнадцатиричном виде
+можно написать:
+
+\code
+std::string result( cpp_util_2::slexcast(
+	cpp_util_2::lexcasts::all( l, " ",
+		cpp_util_2::lexcasts::hex() ) ) );
+\endcode
+
+Иногда возникает необходимость отобразить все содержимое std::string
+в виде шестнадцатиричного представления каждого из символов в C-формате
+(т.е. с использованием префикса \\x). Для этого можно воспользоваться
+конструкцией:
+
+\code
+std::string	a( ... );
+std::string	result( cpp_util_2::slexcast(
+	cpp_util_2::lexcasts::all( a,
+		"" /* Это не пробел, а пустая строка! */,
+		cpp_util_2::lexcasts::hex_bslashx() ) ) );
+\endcode
+
+С функции cpp_util_2::lexcasts::all() можно использовать итераторы. Например,
+для того, чтобы отобразить все элементы массива:
+
+\code
+int	array[ 10 ] = { ... };
+std::cout << cpp_util_2::slexcast( cpp_util_2::lexcasts::all(
+	array, array + ( sizeof( array ) / sizeof( array[ 0 ] ) ), " " ) );
+\endcode
+
+Или все элементы множества, большие указанного значения:
+
+\code
+std::set< int >	s;
+...
+std::cout << cpp_util_2::slexcast( cpp_util_2::lexcasts::all(
+	s.upper_bound( k ), s.end(), "\n" ) );
+\endcode
+
+\subsection	cpp_util_2__lexcasts__complex_types__custom_putter	Собственные Putter-ы
+
+Иногда требуется создать собственный объект Putter. Например в следующих
+случаях:
+
+1. Класс, который требуется преобразовать определен в чужом namespace. И
+в этом namespace для класса не определен оператор сдвига в std::ostream. Т.е.
+
+\code
+namespace	ns1
+{
+	class	useful_t { ... };
+}
+
+namespace	ns2
+{
+	void	process( const ns1::useful_t & o )
+	{
+		// ОШИБКА: не будет скомпилировано!
+		std::string s( cpp_util_2::slexcast( o ) );
+	}
+}
+\endcode
+
+Решением может быть:
+
+\code
+namespace	ns2
+{
+	struct	useful_putter
+	{
+		void
+		operator()( std::ostream & to, const ns1::useful_t & o )
+		{
+			...
+		}
+	};
+	
+	void	process( const ns1::useful_t & o )
+	{
+		std::string s( cpp_util_2::slexcast( o, useful_putter() ) );
+	}
+}
+\endcode
+
+Либо:
+
+\code
+namespace	ns2
+{
+	void
+	useful_putter( std::ostream & to, const ns1::useful_t & o )
+	{
+		...
+	}
+	
+	void	process( const ns1::useful_t & o )
+	{
+		std::string s( cpp_util_2::slexcast( o, useful_putter ) );
+	}
+}
+\endcode
+
+2. Необходимо отображать не весь объект, а только его часть. Например,
+если необходимо отобразить только значение элемента std::map, но не
+ключ этого элемента. Решением может быть:
+
+\code
+typedef	std::map< int, std::string >	str_by_int_map_t;
+
+void
+value_putter( std::ostream & to, const str_by_int_map_t::value_type & o )
+{
+	to << o.second;
+}
+
+// Отображение всех значений всех элементов, чей ключ больше указанного.
+void
+show_values_for_greater_keys(
+	int k,
+	const str_by_int_map_t & m )
+{
+	std::cout << cpp_util_2::slexcast( cpp_util_2::lexcasts::all(
+		m.upper_bound( k ), m.end(), "\n", value_putter ) )
+		<< std::endl;
+}
+\endcode
+
+*/

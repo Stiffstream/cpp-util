@@ -1,0 +1,123 @@
+/*!
+\page	cpp_util_2__version	cpp_util_2: Version changes.
+
+\section cpp_util_2__2_7_2 2.7.2
+
+	2016.04.12
+
+	cpp_util_2::at_scope_exit() added.
+
+	cpp_util_2::rollback_on_exception() added.
+
+	cpp_util_2::ensure() added.
+
+\section cpp_util_2__2_7_0 2.7.0
+
+	2013.08.03
+
+	unary_method completelly deleted.
+
+	Macro CPP_UTIL_2_WINDOWS added. This macro is defined if
+	CPP_UTIL_2_WIN32 or CPP_UTIL_2_WIN64 is defined.
+
+\section cpp_util_2__2_6_0 2.6.0
+
+	2010.11.15
+
+	Добавлен cpp_util_2::hex_dumps::string_dumper_without_spaces.
+
+\section cpp_util_2__2_5_0 2.5.0
+
+	2008.08.21, 2008.09.05
+
+	Из класса cpp_util_2::string_piece_t удалены шаблонные конструкторы
+	для того, чтобы не было проблем в обработке ситуаций:
+	\code
+	char tmp[ 32 ];
+	cpp_util_2::string_piece_t a( tmp );
+	cpp_util_2::string_piece_t b( "aaa" );
+	\endcode
+	
+	Добавлена функция cpp_util::string_literal().
+
+\section cpp_util_2__2_4_0 2.4.0
+
+	2008.06.17, 2008.06.23
+
+	Реорганизация класса string_piece_t.
+
+	Добавлен класс cpp_util_2::temporary_object_ref_t.
+
+\section cpp_util_2__2_3_1 2.3.1
+
+	2008.01.23
+
+	Создан класс string_piece_t.
+
+	Средства из cpp_util_2::hex_dumps теперь используют string_piece_t,
+	что позволяет использовать их не только с std::string.
+
+	Добавлен класс cpp_util_2::hex_dumps::hex_escaped_string_dumper.
+
+\section cpp_util_2__2_3_0 2.3.0
+
+	2007.12.15
+
+	Создано пространство имен cpp_util_2::hex_dumps.
+
+	Создан класс cpp_util_2::hex_dumps::string_dumper.
+
+\section	cpp_util_2__2_2_0	2.2.0
+
+	2004.09.10
+
+	Переход на mxx_ru.
+
+\section	cpp_util_2__2_1_0	2.1.0
+
+	2004.02.18
+	
+	Преобразование и упрощение функций cpp_util_2::lexcast(), cpp_util_2::slexcast().
+	
+	Преобразование и упрощение средств из пространства имен cpp_util_2::lexcasts:
+	- cpp_util_2::lexcasts::hex;
+	- cpp_util_2::lexcasts::prefixed_hex, cpp_util_2::lexcasts::hex_0x,
+	cpp_util_2::lexcasts::hex_bslashx.
+	
+	Добавлен класс cpp_util_2::lexcasts::def_putter.
+
+\section	cpp_util_2__2_0_3	2.0.3
+
+	2004.01.11, 2004.01.14
+	
+	Добавлены функции cpp_util_2::slexcast().
+	
+	Добавлены функции cpp_util_2::lexcasts::all(), упрощающие преобразование
+	векторов и контейнеров.
+	
+	Добавлены классы cpp_util_2::lexcasts::hex_t, cpp_util_2::lexcasts::prefixed_hex_t
+	и функции cpp_util_2::lexcasts::hex_0x(), cpp_util_2::lexcasts::hex_bslashx(),
+	которые упрощают преобразование значений в шестнадцатиричное
+	представление.
+	
+	Добавлены классы cpp_util_2::putter_t, cpp_util_2::getter_t
+	и несколько перегруженных вариантов функции cpp_util_2::lexcast().
+
+	Добавлено пространство имен cpp_util_2::lexcasts.
+
+	Добавлен класс cpp_util_2::lexcasts::string_getter_t и
+	функция cpp_util_2::lexcasts::string_getter().
+
+\section	cpp_util_2__2_0_2	2.0.2
+
+	2003.12.27
+	
+	Добавлена функция cpp_util_2::lexcast().
+
+\section	cpp_util_2__2_0_1	2.0.1
+
+	2003.11.20
+	
+	Добавлены классы cpp_util_2::unary_method_t,
+	cpp_util_2::const_unary_method_t.
+*/
