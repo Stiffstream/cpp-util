@@ -8,6 +8,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <climits>
+#include <iterator>
 
 #include <cpp_util_3/lexcasts/util.hpp>
 
@@ -243,18 +244,14 @@ container_putter_demo()
 {
 	std::cout << "*** container_putter_demo:" << std::endl;
 
-	// Печать всех значений из массива.
+	// Print all values from vector.
 	unsigned int ui[ 8 ] = { 18, 17, 16, 15, 14, 13, 12, 10 };
-	std::cout << cpp_util_3::slexcast(
-			cpp_util_3::lexcasts::all(
-				ui, ui + ( sizeof(ui) / sizeof(ui[0]) ) ) )
+	std::cout << cpp_util_3::lexcasts::all( std::begin(ui), std::end(ui) )
 		<< std::endl;
-	// То же самое, но в шестнадцатиричном виде.
-	std::cout << cpp_util_3::slexcast(
-			cpp_util_3::lexcasts::all(
-				ui, ui + ( sizeof(ui) / sizeof(ui[0]) ), " ",
-				cpp_util_3::lexcasts::hex() ) )
-		<< std::endl;
+	// The same but in hex with 0x prefix.
+	std::cout << cpp_util_3::lexcasts::all(
+				std::begin(ui), std::end(ui), " ",
+				cpp_util_3::lexcasts::hex_0x() ) << std::endl;
 
 	// Печать всех значений вектора строк, разделяя каждое значение
 	// переводом строки.
@@ -265,26 +262,23 @@ container_putter_demo()
 	ss.insert( "EEE" );
 	ss.insert( "DDD" );
 #if !defined( __BORLANDC__ )
-	std::cout << cpp_util_3::slexcast(
-			cpp_util_3::lexcasts::all( ss.begin(), ss.end(), "\n" ) )
+	std::cout << cpp_util_3::lexcasts::all( ss.begin(), ss.end(), "\n" )
 		<< std::endl;
 #endif
 
-	// Еще раз, но проще.
-	std::cout << cpp_util_3::slexcast(
-			cpp_util_3::lexcasts::all( ss, "\n" ) )
-		<< std::endl;
+	// Yet again but simpler.
+	std::cout << cpp_util_3::lexcasts::all( ss, "\n" ) << std::endl;
 
-	// Отображаем каждый символ строки в шестнадцатиричном виде.
+	// Print every symbol in hex.
 	std::string hello( "Hello, World" );
 	std::cout << "ASCII string: " << hello
-		<< "\nHex string: " << cpp_util_3::slexcast(
-			cpp_util_3::lexcasts::all( hello.begin(), hello.end(), "",
-				cpp_util_3::lexcasts::hex_bslashx() ) )
-		// Печатаем тоже самое, но проще.
-		<< "\nHex string 2: "<< cpp_util_3::slexcast(
-			cpp_util_3::lexcasts::all( hello, "",
-				cpp_util_3::lexcasts::hex_bslashx() ) )
+		<< "\nHex string : "
+		<< cpp_util_3::lexcasts::all( hello.begin(), hello.end(), "",
+				cpp_util_3::lexcasts::hex_bslashx() )
+		// The same result.
+		<< "\nHex string 2: "
+		<< cpp_util_3::lexcasts::all( hello, "",
+				cpp_util_3::lexcasts::hex_bslashx() )
 		<< std::endl;
 }
 

@@ -3,8 +3,7 @@
 	v.2.0.2
 
 	\file
-	\brief Функция для конвертации значений из одного типа в
-		другой с использованием промежуточного текстового представления.
+	\brief %lexcast and %slexcast functions family.
 */
 
 #pragma once
@@ -110,33 +109,23 @@ lexcast(
 
 /*!
 	\since v.2.1.0
-	\brief Функция для конвертации значений из одного типа в
-		другой с использованием промежуточного текстового представления
-		и специальноых способов преобразования значения.
+	\brief A version of %lexcast() with custom putter and getter objects.
 
-	Данный вариант lexcast использует объект-преобразователь, который
-	осуществляет преобразование значения в std::ostream и
-	объект-преобразователь, который считывает значение из
-	std::istream.
-
-	Если требуется только специальный объект-getter, то в качестве
-	объекта-putter можно указать объект cpp_util_3::lexcasts::def_putter:
+	Usage example:
 \code
-// Извлекаем число из строкового шестнадцатиричного представления.
+// Convert number from hex.
 int i = cpp_util_3::lexcast< int >( "ffab",
 	cpp_util_3::lexcasts::def_putter(),
 	cpp_util_3::lexcasts::hex_getter() );
 \endcode
 
-	\par Требования к типу Putter
-	Тип Putter должен иметь метод operator() следующего формата:
+	Type \a Putter must have operator() with the following format:
 \code
 void
 operator( std::ostream & to, const From & what ) const;
 \endcode
 
-	\par Требования к типу Getter
-	Тип Getter должен иметь метод operator() следующего формата:
+	Type \a Getter must have operator() with the following format:
 \code
 void
 operator( std::istream & to, To & what ) const;
@@ -145,11 +134,11 @@ operator( std::istream & to, To & what ) const;
 template< class To, class From, class Putter, class Getter >
 To
 lexcast(
-	//! Что преобразуется.
+	//! What to transform.
 	const From & f,
-	//! Как преобразуется в std::ostream.
+	//! How to put source value into std::ostream.
 	const Putter & putter,
-	//! Как преобразуется из std::istream.
+	//! How to get result value from std::istream.
 	const Getter & getter )
 {
 	std::stringstream	ss;
@@ -163,12 +152,9 @@ lexcast(
 
 /*!
 	\since v.2.1.0
+	\brief A variant of %lexcast for transforming value into string.
 
-	Вариант функции lexcast() для преобразования в строку.
-
-	С помощью cpp_util_3::lexcast() можно попытаться преобразовать
-	любой объект в строку, если у этого объекта определен оператор
-	сдвига в std::ostream. Например:
+	Usage example:
 \code
 class	A
 {
@@ -190,21 +176,6 @@ operator<<( std::ostream & to, const A & a )
 void f()
 {
 	A a;
-	std::string str_a( cpp_util_3::lexcast< std::string >( a ) );
-}
-\endcode
-
-	Но проблема в том, что в str_a будет содержаться только "m_a:",
-	т.к. оператор >> для std::string извлекает значения из промежуточного
-	std::stringstream в cpp_util_3::lexcast() только до первого пробела.
-
-	Функция slexcast() решает эту проблему и позволяет поместить
-	в str_a все содержимое промежуточного std::stringstream. В приведенном
-	примере функцию slexcast()  можно использовать так:
-\code
-void f()
-{
-	A a;
 	std::string str_a( cpp_util_3::slexcast( a ) );
 }
 \endcode
@@ -212,7 +183,7 @@ void f()
 template< class From >
 std::string
 slexcast(
-	//! Что преобразуется.
+	//! What to transform.
 	const From & f )
 {
 	std::stringstream	ss;
@@ -223,12 +194,9 @@ slexcast(
 
 /*!
 	\since v.2.1.0
+	\brief A special form of %slexcast with custom putter into ostream.
 
-	Вариант функции slexcast() с использованием объекта-преобразователя
-	значения в строку.
-
-	\par Требования к типу Putter
-	Тип Putter должен иметь метод operator() следующего формата:
+	Type \a Putter must have operator() with the following format:
 \code
 void
 operator( std::ostream & to, const From & what ) const;
@@ -237,9 +205,9 @@ operator( std::ostream & to, const From & what ) const;
 template< class From, class Putter >
 std::string
 slexcast(
-	//! Что преобразуется.
+	//! What to transform.
 	const From & f,
-	//! Как преобразуется.
+	//! How to put source value into stream.
 	const Putter & putter )
 {
 	std::stringstream	ss;
