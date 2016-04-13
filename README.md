@@ -225,4 +225,26 @@ vector is: 0x1, 0x2, 0x3, 0x4, 0x5, 0x6
 items greater than 3: 4, 5, 6
 ~~~~~
 
+### cpp_util_3/hex_dumps/string_dumper.hpp
+
+Helper functions for creation of hex dumps of strings or byte buffers
+(could be useful for logging):
+
+~~~~~
+::c++
+#include <cpp_util_3/hex_dumps/string_dumper.hpp>
+#include <iostream>
+
+using namespace std;
+namespace dumps = cpp_util_3::hex_dumps;
+
+int main()
+	{
+		// Will print '68 65 6c 6c 6f 2c 20 77 6f 72 6c 64':
+		cout << "'" << dumps::string_dumper("hello, world") << "'\n";
+		// Will print '68656c6c6f2c20776f726c64'
+		cout << "'" << dumps::string_dumper_without_spaces("hello, world") << "'\n";
+	}
+~~~~~
+
 **Under Contruction**
