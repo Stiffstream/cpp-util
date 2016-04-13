@@ -136,6 +136,8 @@ keywords for exporting/importing functions from dynamic-link libraries:
 ~~~~~
 ::c++
 // Somewhere in DLL-related header file...
+#pragma once
+...
 #include <cpp_util_3/detect_compiler.hpp>
 
 #if defined(MY_DLL)
@@ -147,12 +149,34 @@ keywords for exporting/importing functions from dynamic-link libraries:
 	// Symbols must be imported.
 	#define MY_DLL_DECLSPEC CPP_UTIL_3_IMPORT
 #endif
-
 ...
 class MY_DLL_DECLSPEC some_exported_class { ... };
 
 MY_DLL_DECLSPEC void some_exported_function();
 ~~~~~
 
+## cpp_util_3/ensure.hpp
+
+Helper function `ensure` for simplification of checking for some condition
+and throwing an exception if that condition is not fulfilled:
+
+~~~~~
+::c++
+#include <cpp_util_3/ensure.hpp>
+...
+
+// Do some 3rd-party library call.
+auto r = mosquitto_subscribe( m_mosq.get(),
+		&mid, topic_name.c_str(), qos_to_use );
+// Expect only a subset of error codes.
+// If another error code is returned then exception must be thrown.
+cpp_util_3::ensure< std::runtime_error >(
+		MOSQ_ERR_SUCCESS == r || MOSQ_ERR_NO_CONN == r || MOSQ_ERR_CONN_LOST == r,
+		[&]{
+			return tfm::format( "mosquitto_subscribe(%s, %d) failed, rc=%d",
+				topic_name, qos_to_use, r );
+		} );
+
+~~~~~
 
 **Under Contruction**
