@@ -25,6 +25,32 @@ hg clone https://bitbucket.com/sobjectizerteam/cpp_util-3.0
 set INCLUDE=%INCLUDE%;c:\projects\cpp_util-3.0\dev
 ~~~~~
 
+## Recipe For MxxRu::externals
+
+Inclusion of cpp\_util via MxxRu::externals can be done wil recipes like
+these:
+
+~~~~~
+::ruby
+MxxRu::arch_externals :cpp_util_3 do |e|
+  e.url 'https://bitbucket.org/sobjectizerteam/cpp_util-3.0/get/v.3.0.0-rc2.tar.gz'
+
+  e.map_dir 'dev/cpp_util_3' => 'dev'
+end
+~~~~~
+
+Or
+
+~~~~~
+::ruby
+MxxRu::hg_externals :cpp_util_3 do |e|
+  e.url 'https://bitbucket.org/sobjectizerteam/cpp_util-3.0'
+  e.tag 'v.3.0.0-rc2'
+
+  e.map_dir 'dev/cpp_util_3' => 'dev'
+end
+~~~~~
+
 ## Building Samples And Test
 
 [Mxx_ru](https://sourceforge.net/projects/mxxru/) build tool is necessary
