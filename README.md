@@ -247,4 +247,32 @@ int main()
 	}
 ~~~~~
 
+## cpp_util_3/rollback_on_exception.hpp
+
+Helper function `do_with_rollback_on_exception` which simplifies
+writting of exception safe code:
+
+~~~~~
+::c++
+#include <cpp_util_3/rollback_on_exception.hpp>
+...
+void some_complex_container::insert_item( const some_data & item )
+{
+	// Three internal containers must be updated.
+	// Any update can lead to exception.
+	// Container update must be rolled back on exception.
+	first_container_.push_back( item );
+	cpp_util_3::do_with_rollback_on_exception(
+		[&]{
+			second_container_.push_back( item );
+			cpp_util_3::do_with_rollback_on_exception(
+				[&]{ thrid_container_.push_back( itsm ); },
+				// Rollback action.
+				[&]{ second_container_.pop_back(); } );
+		},
+		// Rollback action.
+		[&]{ first_container_.pop_back(); } );
+}
+~~~~~
+
 **Under Contruction**
