@@ -387,7 +387,7 @@ std::ostream &
 operator<<( std::ostream & to, const all_cont_t< Cont > & what )
 {
 	auto b = std::begin(what.m_c);
-	auto e = std::begin(what.m_c);
+	auto e = std::end(what.m_c);
 	while( b != e )
 	{
 		to << *b;
