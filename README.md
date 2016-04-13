@@ -275,4 +275,27 @@ void some_complex_container::insert_item( const some_data & item )
 }
 ~~~~~
 
-**Under Contruction**
+## cpp_util_3/string_piece.hpp
+
+Helper class `string_piece_t` is old and simple analog of `string_span` from
+C++ Core Guidelines or `string_view` from proposals for C++17.
+
+It can be used for functions and methods which except string-like params:
+
+~~~~~
+::c++
+#include <cpp_util_3/string_piece.hpp>
+...
+bool is_valid_name( cpp_util_3::string_piece_t name ) {
+  ... // Some manipulation of name's contents.
+}
+...
+char name1[ 16 ] = {...};
+if( is_valid_name( name1 ) ) { ... }
+
+if( is_valid_name( "some name" ) ) { ... }
+
+std::string name2 = ...;
+if( is_valid_name( name2 ) ) { ... }
+~~~~~
+
