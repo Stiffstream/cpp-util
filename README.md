@@ -87,7 +87,9 @@ ruby sample/lexcast/util/prj.rb
 
 *Note.* Mxx\_ru tries to detect type of your compiler automatically. In most
 cases it just works. But sometimes it is necessary to specify your compiler
-manually via `MXX_RU_CPP_TOOLSET` environment variable:
+manually via `MXX_RU_CPP_TOOLSET` environment variable. For example if you have
+GCC and clang in your Linux and want to use clang, then `MXX_RU_CPP_TOOLSET`
+must be set as:
 
 ~~~~~
 ::bash
