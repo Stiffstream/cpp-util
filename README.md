@@ -116,9 +116,7 @@ void dump_content_to_file( const char * file_name, const content & cnt )
 	std::FILE * file = std::fopen( file_name, "w" );
 	if( file )
 	{
-		auto file_closer = cpp_util_3::at_scope_exit( [file] {
-			std::fclose( file );
-		} );
+		auto file_closer = cpp_util_3::at_scope_exit( [file]{ std::fclose( file ); } );
 		...
 	}
 }
@@ -164,7 +162,6 @@ and throwing an exception if that condition is not fulfilled:
 ::c++
 #include <cpp_util_3/ensure.hpp>
 ...
-
 // Do some 3rd-party library call.
 auto r = mosquitto_subscribe( m_mosq.get(),
 		&mid, topic_name.c_str(), qos_to_use );
@@ -177,6 +174,55 @@ cpp_util_3::ensure< std::runtime_error >(
 				topic_name, qos_to_use, r );
 		} );
 
+~~~~~
+
+## cpp_util_3/lexcast.hpp
+
+Family of functions `lexcast` and `slexcast`. They are very old and now it
+is better to use more modern and efficient alternatives (*Boost.LexicalCast*,
+*cppformat* or *tinyformat*). Functions `lexcast`/`slexcast` are still in
+cpp\_util library mostly by reasons of compatibility.
+
+But there are some lexcast helpers which can be useful even now.
+
+### cpp_util_3/lexcasts/utils.hpp
+
+Several tools like `hex`, `hex_0x` and `all`. For example, it is possible to
+show content of a vector by help from cppformat and cpp\_util:
+
+~~~~~
+::c++
+#include <cppformat/format.h>
+
+#include <cpp_util_3/lexcasts/util.hpp>
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+using namespace cpp_util_3;
+
+int main()
+	{
+		vector< int > v{ 1, 2, 3, 4, 5, 6 };
+
+		fmt::print( "vector is: {}\n", lexcasts::all( v, ", " ) );
+		fmt::print( "vector is: {}\n", lexcasts::all( v, ", ", lexcasts::hex_0x() ) );
+		fmt::print( "items greater than 3: {}\n",
+				lexcasts::all(
+					upper_bound( begin(v), end(v), 3),
+					end(v),
+					", ", lexcasts::hex() ) );
+	}
+~~~~~
+
+This example will print:
+
+~~~~~
+vector is: 1, 2, 3, 4, 5, 6
+vector is: 0x1, 0x2, 0x3, 0x4, 0x5, 0x6
+items greater than 3: 4, 5, 6
 ~~~~~
 
 **Under Contruction**
