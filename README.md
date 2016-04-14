@@ -27,7 +27,7 @@ set INCLUDE=%INCLUDE%;c:\projects\cpp_util-3.0\dev
 
 ## Recipe For MxxRu::externals
 
-Inclusion of cpp\_util via MxxRu::externals can be done wil recipes like
+Inclusion of cpp\_util via MxxRu::externals can be done with recipes like
 these:
 
 ~~~~~
@@ -298,4 +298,3 @@ if( is_valid_name( "some name" ) ) { ... }
 std::string name2 = ...;
 if( is_valid_name( name2 ) ) { ... }
 ~~~~~
-
