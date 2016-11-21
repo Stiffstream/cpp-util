@@ -14,26 +14,6 @@
 
 namespace cpp_util_3 {
 
-namespace loops_details {
-
-template< typename COUNT_TYPE >
-typename std::enable_if< std::is_unsigned< COUNT_TYPE >::value >::type
-ensure_non_negative( COUNT_TYPE )
-	{
-		/* There is no need to do additional checks */
-	}
-
-template< typename COUNT_TYPE >
-typename std::enable_if< std::is_signed< COUNT_TYPE >::value >::type
-ensure_non_negative( COUNT_TYPE n )
-	{
-		ensure< std::invalid_argument >( n >= 0,
-				[]{ return "N must be a non negative integer"; } );
-	}
-
-} /* namespace loops_details */
-
-//FIXME: there should be comments for arguments of that function.
 /*!
  * \brief Helper for doing some action for N times.
  *
@@ -42,15 +22,26 @@ ensure_non_negative( COUNT_TYPE n )
 	cpp_util_3::n_times( 3, []{ cout << "===" << endl; } );
  * \endcode
  *
+ * \note
+ * This function is implemented as:
+ * \code
+	for(COUNT_TYPE i{}; i < n; ++i) body();
+ * \endcode
+ * It means that in case when COUNT_TYPE is signed and \a n is a negative
+ * there won't be an invocation of \a body.
+ *
  * \tparam COUNT_TYPE type of loop counter.
  * \tparam LAMBDA lambda or functional object to be body of the loop.
  */
 template< typename COUNT_TYPE, typename LAMBDA >
 void
-n_times( COUNT_TYPE n, LAMBDA && body )
+n_times(
+	//! Count of invocations of \a body.
+	const COUNT_TYPE n,
+	//! An action which should be performed \a n times.
+	LAMBDA && body )
 	{
-		loops_details::ensure_non_negative( n );
-		for( ; n; --n )
+		for( COUNT_TYPE i{}; i < n; ++i )
 			body();
 	}
 

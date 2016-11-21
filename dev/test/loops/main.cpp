@@ -53,8 +53,9 @@ simple_n_times_negative_int()
 	{
 		const int N = -1;
 		int i = 0;
-		CHECK_THROW( std::invalid_argument,
-			n_times( N, [&]{ ++i; } ); );
+		n_times( N, [&]{ ++i; } );
+
+		CHECK_CONDITION( 0 == i );
 	}
 
 UNIT_TEST_MAIN(
