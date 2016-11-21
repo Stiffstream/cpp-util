@@ -1,0 +1,8 @@
+syntax: glob
+
+.externals
+*.swp
+dev/target
+dev/__*.vim
+dev/local-build.rb
+dev/*.log
