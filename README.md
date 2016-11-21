@@ -225,7 +225,20 @@ vector is: 0x1, 0x2, 0x3, 0x4, 0x5, 0x6
 items greater than 3: 4, 5, 6
 ~~~~~
 
-### cpp_util_3/hex_dumps/string_dumper.hpp
+## cpp_util_3/loops.hpp
+
+Helper function(s) for writing loops in declarative style. For example:
+
+~~~~~
+::c++
+#include <cpp_util_3/loops.hpp>
+
+using namespace cpp_util_3;
+...
+n_times( 3, []{ std::cout << "===" << std::endl; } );
+~~~~~
+
+## cpp_util_3/hex_dumps/string_dumper.hpp
 
 Helper functions for creation of hex dumps of strings or byte buffers
 (could be useful for logging):
