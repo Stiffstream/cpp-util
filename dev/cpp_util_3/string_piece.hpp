@@ -3,14 +3,16 @@
  */
 
 /*!
- * \since v.2.3.1
  * \brief A simple wrapper for raw char pointers and std::string.
+ * \since
+ * v.2.3.1
  */
 
 #pragma once
 
 #include <string>
 #include <cstring>
+#include <array>
 
 namespace cpp_util_3 {
 
@@ -19,7 +21,9 @@ namespace cpp_util_3 {
 //
 
 /*!
- * \since v.2.3.1
+ * \since
+ * v.2.3.1
+ *
  * \brief A simple wrapper for raw char pointers and std::string.
  *
  * The idea of that class was borrowed from PCRE (http://www.pcre.org).
@@ -28,7 +32,6 @@ namespace cpp_util_3 {
  * from raw pointers).
  *
  * \par v.2.5.0
- *
  * In v.2.4.0 was discovered that length of string is not always
  * calculated correctly:
  * \code
@@ -43,6 +46,12 @@ namespace cpp_util_3 {
  * \endcode
  * Because of that templated constructors removed in v.2.5.0.
  *
+ * \par v.3.0.0
+ * Support for std::array from C++11 is added:
+ * \code
+	std::array< char, 4096 > data;
+	cpp_util_3::string_piece_t all_data( data );
+ * \endcode
  * \par Thanks
  * <a href="http://www.rsdn.ru/Users/48023.aspx">night beast</a> for
  * discovering of error in templated constructors implementations.
@@ -165,6 +174,24 @@ class string_piece_t
 		//! For null-terminated strings.
 		string_piece_t( const unsigned char * p )
 			:	m_data( from_null_terminated( p ) )
+			{}
+		//! For std::array.
+		/*!
+		 * \since
+		 * v.3.0.0
+		 */
+		template< std::size_t N >
+		string_piece_t( const std::array< char, N > & arr )
+			:	m_data( from_array_fragment( arr.data(), N ) )
+			{}
+		//! For std::array.
+		/*!
+		 * \since
+		 * v.3.0.0
+		 */
+		template< std::size_t N >
+		string_piece_t( const std::array< unsigned char, N > & arr )
+			:	m_data( from_array_fragment( arr.data(), N ) )
 			{}
 
 		const char*

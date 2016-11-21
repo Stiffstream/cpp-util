@@ -31,6 +31,9 @@ void check_begin_end()
 		CHECK_CONDITION( "" == f( cpp_util_3::string_piece_t() ) );
 	}
 
+using array_char_5 = std::array<char, 5>;
+using array_uchar_5 = std::array<unsigned char, 5>;
+
 UNIT_TEST_MAIN(
 	const char * s1 = "abc";
 	const std::string s2 = "abc";
@@ -82,5 +85,17 @@ UNIT_TEST_MAIN(
 			cpp_util_3::string_literal( "Just Another Test" ) );
 	check_type( sp7, cpp_util_3::string_piece_t::array_fragment );
 	CHECK_CONDITION( 17 == sp7.size() );
+
+	array_char_5 arr1;
+	cpp_util_3::string_piece_t sp8( arr1 );
+	check_type( sp8, cpp_util_3::string_piece_t::array_fragment );
+	CHECK_CONDITION( 5 == sp8.size() );
+	CHECK_CONDITION( arr1.data() == sp8.data() );
+
+	array_uchar_5 arr2;
+	cpp_util_3::string_piece_t sp9( arr2 );
+	check_type( sp9, cpp_util_3::string_piece_t::array_fragment );
+	CHECK_CONDITION( 5 == sp9.size() );
+	CHECK_CONDITION( reinterpret_cast< const char * >(arr2.data()) == sp9.data() );
 )
 
