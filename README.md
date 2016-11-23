@@ -176,6 +176,33 @@ cpp_util_3::ensure< std::runtime_error >(
 
 ~~~~~
 
+## cpp_util_3/outliving.hpp
+
+Helper class and related stuff for lifetime indication via type:
+
+~~~~~
+::c++
+class config { ... };
+
+class data_processor {
+	// Indicator that reference to config must outlive data_processor object.
+	cpp_util_3::outliving_reference_t<const config> cfg_;
+public :
+	data_processor(
+		// Indicator that reference to config must outlive data_processor object.
+		cpp_util_3::outliving_reference_t<const config> cfg)
+	: cfg_(cfg)
+	{...}
+	...
+};
+
+void f() {
+	config cfg = load_config();
+	data_processor processor( cpp_util_3::outliving_const(cfg) );
+	...
+}
+~~~~~
+
 ## cpp_util_3/lexcast.hpp
 
 Family of functions `lexcast` and `slexcast`. They are very old and now it
