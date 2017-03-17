@@ -25,6 +25,22 @@ public :
 	int get() const { return m_value.get(); }
 };
 
+class base {
+public :
+	base() {}
+	virtual ~base() {}
+
+	virtual int val() const = 0;
+};
+
+class derived final : public base {
+	int m_v;
+public :
+	derived(int v) : m_v(v) {}
+
+	virtual int val() const { return m_v; }
+};
+
 void
 simple()
 	{
@@ -42,7 +58,26 @@ simple()
 		CHECK_CONDITION( 42 == c.get() );
 	}
 
+void
+inheritance()
+	{
+		auto get_val = []( outliving_reference_t< base > o ) {
+			return o.get().val();
+		};
+		auto get_val_c = []( outliving_reference_t< const base > o ) {
+			return o.get().val();
+		};
+
+		derived d( (42) );
+		derived dc( (43) );
+
+		CHECK_CONDITION( 42 == get_val( outliving_mutable(d) ) );
+		CHECK_CONDITION( 42 == get_val_c( outliving_const(d) ) );
+		CHECK_CONDITION( 43 == get_val_c( outliving_const(dc) ) );
+	}
+
 UNIT_TEST_MAIN(
 	simple();
+	inheritance();
 )
 
