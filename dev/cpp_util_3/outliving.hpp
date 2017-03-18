@@ -98,7 +98,7 @@ public :
 	explicit outliving_reference_t(T & r) : base_type(r) {}
 
 	template<typename U>
-	outliving_reference_t(U && r) : base_type(r) {}
+	explicit outliving_reference_t(U && r) : base_type(r) {}
 
 	outliving_reference_t(T &&) = delete;
 	outliving_reference_t(outliving_reference_t const & o)
