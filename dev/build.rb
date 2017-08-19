@@ -29,6 +29,8 @@ MxxRu::Cpp::composite_target( Mxx_ru::BUILD_ROOT ) {
 
 	required_prj 'test/loops/prj.ut.rb'
 
+	required_prj 'test/terminate_if_throws/prj.ut.rb'
+
 	required_prj 'test/outliving/prj.ut.rb'
 
 	required_prj 'sample/lexcast/util/prj.rb'
