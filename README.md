@@ -126,7 +126,7 @@ void dump_content_to_file( const char * file_name, const content & cnt )
 ## cpp_util_3/detect_compiler.hpp
 
 Definition for macros like `CPP_UTIL_3_EXPORT`, `CPP_UTIL_3_IMPORT`,
-`CPP_UTIL_3_WINDOWS`, `CPP_UTIL_3_WIN64` and so on.
+`CPP_UTIL_3_UNIX`, `CPP_UTIL_3_WINDOWS`, `CPP_UTIL_3_WIN64` and so on.
 
 Macros `CPP_UTIL_3_EXPORT` and `CPP_UTIL_3_IMPORT` hide compiler-specific
 keywords for exporting/importing functions from dynamic-link libraries:
