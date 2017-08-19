@@ -176,6 +176,40 @@ cpp_util_3::ensure< std::runtime_error >(
 
 ~~~~~
 
+## cpp_util_3/terminate_if_throws.hpp
+
+Helper function `terminate_if_throws` is intended to be used in cases where
+some block of code must be run without any exceptions. If an exception is thrown
+from that block then the whole application must be terminated.
+
+~~~~~
+::c++
+#include <cpp_util_3/terminate_if_throws.hpp>
+...
+// We want to provide strong exception guarantee for that method.
+void some_complex_class::do_some_modification(const params & p) {
+  // Checks all necessary conditions first.
+  // Some exceptions can be thrown here.
+  check_condition_one(p);
+  check_condition_two(p);
+  ...
+  // Preallocate some resources.
+  // Exceptions are expected here. But this is not a problem
+  // because there is no any actual state changes yet.
+  auto r1 = preallocate_resource_one(p);
+  auto r2 = preallocate_resource_two(p);
+  ...
+  // All preparations are done. We don't expect exceptions
+  // in the following block of code. But if some exception is thrown
+  // then we don't know how to repair from it.
+  cpp_util_3::terminate_if_throws( [&] {
+    do_state_change_action_one(...);
+	do_state_change_action_two(...);
+	...
+  } );
+}
+~~~~~
+
 ## cpp_util_3/outliving.hpp
 
 Helper class and related stuff for lifetime indication via type:
