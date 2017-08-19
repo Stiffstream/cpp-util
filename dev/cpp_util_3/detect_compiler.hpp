@@ -45,6 +45,14 @@
  */
 
 /*!
+ * \def CPP_UTIL_3_UNIX
+ * \brief A marker for Unix platforms.
+ *
+ * \since
+ * v.3.0.0
+ */
+
+/*!
 	\def CPP_UTIL_3_WIN32_DLL_ENTRY_POINT
 	\brief Name for Dll-entry poing.
 
@@ -167,5 +175,9 @@
 
 #if defined( CPP_UTIL_3_WIN32 ) || defined( CPP_UTIL_3_WIN64 )
 #define CPP_UTIL_3_WINDOWS
+#endif
+
+#if defined(unix) || defined(__unix__) || defined(__unix)
+#define CPP_UTIL_3_UNIX
 #endif
 
