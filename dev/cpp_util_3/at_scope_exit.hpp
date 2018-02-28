@@ -23,10 +23,16 @@ template< typename L >
 class at_exit_t
 	{
 		L m_lambda;
+		bool m_callable{true};
+
 	public :
-		at_exit_t( L && l ) : m_lambda{ std::forward<L>(l) } {}
-		at_exit_t( at_exit_t && o ) : m_lambda{ std::move(o.m_lambda) } {}
-		~at_exit_t() { m_lambda(); }
+		at_exit_t( const L & l ) : m_lambda{ l } {}
+		at_exit_t( L && l ) : m_lambda{ std::move(l) } {}
+		at_exit_t( at_exit_t && o ) : m_lambda{ std::move(o.m_lambda) }
+			{
+				o.m_callable = false;
+			}
+		~at_exit_t() { if(m_callable) m_lambda(); }
 	};
 
 } /* namespace scope_exit_details */
@@ -50,10 +56,12 @@ class at_exit_t
  * v.2.7.2
  */
 template< typename L >
-scope_exit_details::at_exit_t< L >
+scope_exit_details::at_exit_t< typename std::decay<L>::type >
 at_scope_exit( L && l )
 	{
-		return scope_exit_details::at_exit_t<L>{ std::forward<L>(l) };
+		using actual_parameter_t = typename std::decay<L>::type;
+		return scope_exit_details::at_exit_t<actual_parameter_t>{
+				std::forward<L>(l) };
 	}
 
 } /* namespace cpp_util_3 */
