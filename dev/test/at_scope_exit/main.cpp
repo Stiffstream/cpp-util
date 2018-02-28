@@ -34,7 +34,8 @@ move_at_exit_object_1()
 
 		{
 			auto sentinel1 = at_scope_exit(f);
-			auto sendinel2{std::move(sentinel1)};
+			auto sentinel2{std::move(sentinel1)};
+			(void)sentinel2;
 		}
 		CHECK_CONDITION( 1 == v );
 	}
@@ -47,7 +48,8 @@ move_at_exit_object_2()
 
 		{
 			auto sentinel1 = at_scope_exit(std::move(f));
-			auto sendinel2{std::move(sentinel1)};
+			auto sentinel2{std::move(sentinel1)};
+			(void)sentinel2;
 		}
 		CHECK_CONDITION( 1 == v );
 	}
