@@ -144,7 +144,7 @@ class string_piece_t
 		inline static data_t
 		empty_data()
 			{
-				data_t r = CPP_UTIL_STRING_PIECE_MAKE_DATA( 0, 0, no_type );
+				data_t r = CPP_UTIL_STRING_PIECE_MAKE_DATA( nullptr, 0, no_type );
 				return r;
 			}
 
