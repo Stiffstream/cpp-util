@@ -10,46 +10,43 @@ are relative new and require C++ compilers with good support of C++11 standard.
 Just clone Hg repository somewhere and add path to `dev` folder to your
 INCLUDE path. For example:
 
-~~~~~
-::bash
+```sh
 cd ~/projects
-hg clone https://bitbucket.com/sobjectizerteam/cpp_util-3.0
+git clone https://github.com/Stiffstream/cpp-util
 export CPLUS_INCLUDE_PATH=$(CPLUS_INCLUDE_PATH):~/projects/cpp_util-3.0/dev
-~~~~~
+```
 
 or
 
-~~~~~
+```
 cd c:\projects
-hg clone https://bitbucket.com/sobjectizerteam/cpp_util-3.0
+git clone https://github.com/Stiffstream/cpp-util
 set INCLUDE=%INCLUDE%;c:\projects\cpp_util-3.0\dev
-~~~~~
+```
 
 ## Recipe For MxxRu::externals
 
 Inclusion of cpp\_util via MxxRu::externals can be done with recipes like
 these:
 
-~~~~~
-::ruby
+```ruby
 MxxRu::arch_externals :cpp_util_3 do |e|
-  e.url 'https://bitbucket.org/sobjectizerteam/cpp_util-3.0/get/v.3.0.0-rc2.tar.gz'
+  e.url 'https://github.com/Stiffstream/cpp-util/archive/v3.0.0-rc9.tar.gz'
 
   e.map_dir 'dev/cpp_util_3' => 'dev'
 end
-~~~~~
+```
 
 Or
 
-~~~~~
-::ruby
+```ruby
 MxxRu::hg_externals :cpp_util_3 do |e|
-  e.url 'https://bitbucket.org/sobjectizerteam/cpp_util-3.0'
-  e.tag 'v.3.0.0-rc2'
+  e.url 'https://github.com/Stiffstream/cpp-util'
+  e.tag 'v.3.0.0-rc9'
 
   e.map_dir 'dev/cpp_util_3' => 'dev'
 end
-~~~~~
+```
 
 ## Building Samples And Test
 
@@ -58,32 +55,29 @@ for building samples and tests. To install Mxx\_ru you need Ruby and RubyGems
 installed in your system (in most cases RubyGems is installed with
 Ruby automatically). Then:
 
-~~~~~
-::bash
+```rb
 gem install Mxx_ru
-~~~~~
+```
 
 To build all tests and samples it is necessary to run `ruby build.rb` from
 `dev` folder:
 
-~~~~~
-::bash
+```rb
 cd ~/projects
-hg clone https://bitbucket.com/sobjectizerteam/cpp_util-3.0
-cd cpp_util-3.0/dev
+hg clone https://github.com/Stiffstream/cpp-util
+cd cpp-util/dev
 ruby build.rb
-~~~~~
+```
 
 To build some specific sample or test it is necessary to run corresponding
 project file from `dev` folder:
 
-~~~~~
-::bash
+```rb
 cd ~/projects
-hg clone https://bitbucket.com/sobjectizerteam/cpp_util-3.0
-cd cpp_util-3.0/dev
+hg clone https://github.com/Stiffstream/cpp-util
+cd cpp-util/dev
 ruby sample/lexcast/util/prj.rb
-~~~~~
+```
 
 *Note.* Mxx\_ru tries to detect type of your compiler automatically. In most
 cases it just works. But sometimes it is necessary to specify your compiler
@@ -91,10 +85,9 @@ manually via `MXX_RU_CPP_TOOLSET` environment variable. For example if you have
 GCC and clang in your Linux and want to use clang, then `MXX_RU_CPP_TOOLSET`
 must be set as:
 
-~~~~~
-::bash
+```sh
 export MXX_RU_CPP_TOOLSET=clang_linux
-~~~~~
+```
 
 # License
 
@@ -107,8 +100,7 @@ cpp\_util is distributed under 3-clauses BSD license.
 Helper function `at_scope_exit`. Something like `scope_exit` from D language
 or `defer` from Go:
 
-~~~~~
-::c++
+```cpp
 #include <cpp_util_3/at_scope_exit.hpp>
 ...
 void dump_content_to_file( const char * file_name, const content & cnt )
@@ -120,8 +112,7 @@ void dump_content_to_file( const char * file_name, const content & cnt )
 		...
 	}
 }
-
-~~~~~
+```
 
 ## cpp_util_3/detect_compiler.hpp
 
@@ -131,8 +122,7 @@ Definition for macros like `CPP_UTIL_3_EXPORT`, `CPP_UTIL_3_IMPORT`,
 Macros `CPP_UTIL_3_EXPORT` and `CPP_UTIL_3_IMPORT` hide compiler-specific
 keywords for exporting/importing functions from dynamic-link libraries:
 
-~~~~~
-::c++
+```cpp
 // Somewhere in DLL-related header file...
 #pragma once
 ...
@@ -151,15 +141,14 @@ keywords for exporting/importing functions from dynamic-link libraries:
 class MY_DLL_DECLSPEC some_exported_class { ... };
 
 MY_DLL_DECLSPEC void some_exported_function();
-~~~~~
+```
 
 ## cpp_util_3/ensure.hpp
 
 Helper function `ensure` for simplification of checking for some condition
 and throwing an exception if that condition is not fulfilled:
 
-~~~~~
-::c++
+```cpp
 #include <cpp_util_3/ensure.hpp>
 ...
 // Do some 3rd-party library call.
@@ -174,7 +163,7 @@ cpp_util_3::ensure< std::runtime_error >(
 				topic_name, qos_to_use, r );
 		} );
 
-~~~~~
+```
 
 ## cpp_util_3/terminate_if_throws.hpp
 
@@ -182,8 +171,7 @@ Helper function `terminate_if_throws` is intended to be used in cases where
 some block of code must be run without any exceptions. If an exception is thrown
 from that block then the whole application must be terminated.
 
-~~~~~
-::c++
+```cpp
 #include <cpp_util_3/terminate_if_throws.hpp>
 ...
 // We want to provide strong exception guarantee for that method.
@@ -208,14 +196,13 @@ void some_complex_class::do_some_modification(const params & p) {
 	...
   } );
 }
-~~~~~
+```
 
 ## cpp_util_3/outliving.hpp
 
 Helper class and related stuff for lifetime indication via type:
 
-~~~~~
-::c++
+```cpp
 class config { ... };
 
 class data_processor {
@@ -235,7 +222,7 @@ void f() {
 	data_processor processor( cpp_util_3::outliving_const(cfg) );
 	...
 }
-~~~~~
+```
 
 ## cpp_util_3/lexcast.hpp
 
@@ -251,8 +238,7 @@ But there are some lexcast helpers which can be useful even now.
 Several tools like `hex`, `hex_0x` and `all`. For example, it is possible to
 show content of a vector by help from cppformat and cpp\_util:
 
-~~~~~
-::c++
+```cpp
 #include <cppformat/format.h>
 
 #include <cpp_util_3/lexcasts/util.hpp>
@@ -276,36 +262,34 @@ int main()
 					end(v),
 					", ", lexcasts::hex() ) );
 	}
-~~~~~
+```
 
 This example will print:
 
-~~~~~
+```
 vector is: 1, 2, 3, 4, 5, 6
 vector is: 0x1, 0x2, 0x3, 0x4, 0x5, 0x6
 items greater than 3: 4, 5, 6
-~~~~~
+```
 
 ## cpp_util_3/loops.hpp
 
 Helper function(s) for writing loops in declarative style. For example:
 
-~~~~~
-::c++
+```cpp
 #include <cpp_util_3/loops.hpp>
 
 using namespace cpp_util_3;
 ...
 n_times( 3, []{ std::cout << "===" << std::endl; } );
-~~~~~
+```
 
 ## cpp_util_3/hex_dumps/string_dumper.hpp
 
 Helper functions for creation of hex dumps of strings or byte buffers
 (could be useful for logging):
 
-~~~~~
-::c++
+```cpp
 #include <cpp_util_3/hex_dumps/string_dumper.hpp>
 #include <iostream>
 
@@ -319,15 +303,14 @@ int main()
 		// Will print '68656c6c6f2c20776f726c64'
 		cout << "'" << dumps::string_dumper_without_spaces("hello, world") << "'\n";
 	}
-~~~~~
+```
 
 ## cpp_util_3/rollback_on_exception.hpp
 
 Helper function `do_with_rollback_on_exception` which simplifies
 writting of exception safe code:
 
-~~~~~
-::c++
+```cpp
 #include <cpp_util_3/rollback_on_exception.hpp>
 ...
 void some_complex_container::insert_item( const some_data & item )
@@ -347,7 +330,7 @@ void some_complex_container::insert_item( const some_data & item )
 		// Rollback action.
 		[&]{ first_container_.pop_back(); } );
 }
-~~~~~
+```
 
 ## cpp_util_3/string_piece.hpp
 
@@ -356,8 +339,7 @@ C++ Core Guidelines or `string_view` from proposals for C++17.
 
 It can be used for functions and methods which except string-like params:
 
-~~~~~
-::c++
+```cpp
 #include <cpp_util_3/string_piece.hpp>
 ...
 bool is_valid_name( cpp_util_3::string_piece_t name ) {
@@ -371,4 +353,4 @@ if( is_valid_name( "some name" ) ) { ... }
 
 std::string name2 = ...;
 if( is_valid_name( name2 ) ) { ... }
-~~~~~
+```
